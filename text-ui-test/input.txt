@@ -16,4 +16,8 @@ mark 1
 list
 unmark 2
 list
+delete 10
+delete fnef
+delete 4
+list
 bye

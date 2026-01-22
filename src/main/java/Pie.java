@@ -29,6 +29,8 @@ public class Pie {
                     addDeadline(Parser.parseDeadline(input));
                 } else if (command.equals("event")) {
                     addEvent(Parser.parseEvent(input));
+                } else if (command.equals("delete")) {
+                    deleteTask(Parser.parseDeleteNumber(input));
                 }
             } catch (ParseException | NumberFormatException e) {
                 System.out.println(line + e.getMessage() + line);
@@ -106,5 +108,18 @@ public class Pie {
         System.out.println(line + "Got it. I've added this task:\n"
                 + "  " + newEvent.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+    }
+
+    private static void deleteTask(int taskNumber) {
+        try {
+            Task task = taskList.get(taskNumber);
+            taskList.remove(taskNumber);
+            System.out.println(line + "Noted. I've removed this task:\n"
+                    + "  " + task.toString()
+                    + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(line + "OOPS!!! This specified task does not exist!"
+                    + "\nTry running list to check the available tasks." + line);
+        }
     }
 }

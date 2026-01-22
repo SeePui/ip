@@ -1,12 +1,13 @@
 import java.util.regex.*;
 
 public class Parser {
-    private static final String COMMANDS_REGEX = "^(list|todo|deadline|event|mark|unmark|bye)$";
+    private static final String COMMANDS_REGEX = "^(list|mark|unmark|todo|deadline|event|delete|bye)$";
     private static final String MARK_REGEX = "^mark\\s+(\\d+)$";
     private static final String UNMARK_REGEX = "^unmark\\s+(\\d+)$";
     private static final String TODO_REGEX = "^todo\\s+(.*)$";
     private static final String DEADLINE_REGEX = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
+    private static final String DELETE_REGEX = "^delete\\s+(\\d+)$";
 
     public static String parseCommand(String input) throws ParseException {
         if (input == null || input.trim().isEmpty()) {
@@ -84,6 +85,22 @@ public class Parser {
             return new Event(m.group(1), m.group(2), m.group(3));
         } else {
             throw new ParseException("Invalid event command format. Use: event <description> /from <date> /to <date>");
+        }
+    }
+
+    public static int parseDeleteNumber(String input)
+            throws ParseException, NumberFormatException {
+        Matcher m = Pattern.compile(DELETE_REGEX).matcher(input.trim());
+
+        if (m.matches()) {
+            String numberString = m.group(1);
+            try {
+                return Integer.parseInt(numberString) - 1;
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Task number must be a number.");
+            }
+        } else {
+            throw new ParseException("Invalid delete command format. Use: delete <number>");
         }
     }
 }
