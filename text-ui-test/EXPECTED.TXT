@@ -1,7 +1,17 @@
 
 ________________________________________________________
 Hello! I'm Pie
-What can I do for you?
+What can I do for you? :)
+________________________________________________________
+
+
+________________________________________________________
+Invalid command. Please provide a valid command.
+________________________________________________________
+
+
+________________________________________________________
+There are no tasks in your list. Add tasks first!
 ________________________________________________________
 
 
@@ -11,7 +21,6 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ________________________________________________________
 
-return book: Sunday
 
 ________________________________________________________
 Got it. I've added this task:
@@ -22,8 +31,42 @@ ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [D][ ] finish quiz 2 (by: Sunday 4pm)
 Now you have 3 tasks in the list.
+________________________________________________________
+
+
+________________________________________________________
+Got it. I've added this task:
+  [E][ ] project meeting (from: Mon 2pm to: tues 4pm)
+Now you have 4 tasks in the list.
+________________________________________________________
+
+
+________________________________________________________
+Got it. I've added this task:
+  [E][ ] team meeting in school (from: 11am to: 4pm)
+Now you have 5 tasks in the list.
+________________________________________________________
+
+
+________________________________________________________
+Invalid todo command format. Use: todo <description>
+________________________________________________________
+
+
+________________________________________________________
+Invalid event command format. Use: event <description> /from <date> /to <date>
+________________________________________________________
+
+
+________________________________________________________
+Invalid event command format. Use: event <description> /from <date> /to <date>
+________________________________________________________
+
+
+________________________________________________________
+Invalid deadline command format. Use: deadline <description> /by <date>
 ________________________________________________________
 
 
@@ -31,8 +74,15 @@ ________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+3.[D][ ] finish quiz 2 (by: Sunday 4pm)
+4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
+5.[E][ ] team meeting in school (from: 11am to: 4pm)
 
+________________________________________________________
+
+
+________________________________________________________
+Invalid mark command format. Use: mark <number>
 ________________________________________________________
 
 
@@ -43,15 +93,40 @@ ________________________________________________________
 
 
 ________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] borrow book
+________________________________________________________
+
+
+________________________________________________________
 Here are the tasks in your list:
-1.[T][ ] borrow book
+1.[T][X] borrow book
 2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+3.[D][ ] finish quiz 2 (by: Sunday 4pm)
+4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
+5.[E][ ] team meeting in school (from: 11am to: 4pm)
 
 ________________________________________________________
 
 
 ________________________________________________________
-Bye. Hope to see you again soon!
+OK, I've marked this task as not done yet:
+  [D][ ] return book (by: Sunday)
+________________________________________________________
+
+
+________________________________________________________
+Here are the tasks in your list:
+1.[T][X] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[D][ ] finish quiz 2 (by: Sunday 4pm)
+4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
+5.[E][ ] team meeting in school (from: 11am to: 4pm)
+
+________________________________________________________
+
+
+________________________________________________________
+Bye. Have a good day! Hope to see you again soon!
 ________________________________________________________
 
