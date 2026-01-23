@@ -1,19 +1,15 @@
-
 ________________________________________________________
 Hello! I'm Pie
 What can I do for you? :)
 ________________________________________________________
 
-
 ________________________________________________________
 Invalid command. Please provide a valid command.
 ________________________________________________________
 
-
 ________________________________________________________
 There are no tasks in your list. Add tasks first!
 ________________________________________________________
-
 
 ________________________________________________________
 Got it. I've added this task:
@@ -21,13 +17,11 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ________________________________________________________
 
-
 ________________________________________________________
 Got it. I've added this task:
   [D][ ] return book (by: Sunday)
 Now you have 2 tasks in the list.
 ________________________________________________________
-
 
 ________________________________________________________
 Got it. I've added this task:
@@ -35,13 +29,11 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ________________________________________________________
 
-
 ________________________________________________________
 Got it. I've added this task:
   [E][ ] project meeting (from: Mon 2pm to: tues 4pm)
 Now you have 4 tasks in the list.
 ________________________________________________________
-
 
 ________________________________________________________
 Got it. I've added this task:
@@ -49,26 +41,25 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ________________________________________________________
 
-
 ________________________________________________________
-Invalid todo command format. Use: todo <description>
-________________________________________________________
-
-
-________________________________________________________
-Invalid event command format. Use: event <description> /from <date> /to <date>
+Invalid command format.
+Use: todo <description>
 ________________________________________________________
 
-
 ________________________________________________________
-Invalid event command format. Use: event <description> /from <date> /to <date>
-________________________________________________________
-
-
-________________________________________________________
-Invalid deadline command format. Use: deadline <description> /by <date>
+Invalid command format.
+Use: event <description> /from <date> /to <date>
 ________________________________________________________
 
+________________________________________________________
+Invalid command format.
+Use: event <description> /from <date> /to <date>
+________________________________________________________
+
+________________________________________________________
+Invalid command format.
+Use: deadline <description> /by <date>
+________________________________________________________
 
 ________________________________________________________
 Here are the tasks in your list:
@@ -77,26 +68,22 @@ Here are the tasks in your list:
 3.[D][ ] finish quiz 2 (by: Sunday 4pm)
 4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
 5.[E][ ] team meeting in school (from: 11am to: 4pm)
-
 ________________________________________________________
 
-
 ________________________________________________________
-Invalid mark command format. Use: mark <number>
+Invalid command format.
+Use: <command> <number>
 ________________________________________________________
-
 
 ________________________________________________________
 Nice! I've marked this task as done:
   [D][X] return book (by: Sunday)
 ________________________________________________________
 
-
 ________________________________________________________
 Nice! I've marked this task as done:
   [T][X] borrow book
 ________________________________________________________
-
 
 ________________________________________________________
 Here are the tasks in your list:
@@ -105,15 +92,12 @@ Here are the tasks in your list:
 3.[D][ ] finish quiz 2 (by: Sunday 4pm)
 4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
 5.[E][ ] team meeting in school (from: 11am to: 4pm)
-
 ________________________________________________________
-
 
 ________________________________________________________
 OK, I've marked this task as not done yet:
   [D][ ] return book (by: Sunday)
 ________________________________________________________
-
 
 ________________________________________________________
 Here are the tasks in your list:
@@ -122,20 +106,17 @@ Here are the tasks in your list:
 3.[D][ ] finish quiz 2 (by: Sunday 4pm)
 4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
 5.[E][ ] team meeting in school (from: 11am to: 4pm)
-
 ________________________________________________________
-
 
 ________________________________________________________
 OOPS!!! This specified task does not exist!
 Try running list to check the available tasks.
 ________________________________________________________
 
-
 ________________________________________________________
-Invalid delete command format. Use: delete <number>
+Invalid command format.
+Use: <command> <number>
 ________________________________________________________
-
 
 ________________________________________________________
 Noted. I've removed this task:
@@ -143,16 +124,13 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 ________________________________________________________
 
-
 ________________________________________________________
 Here are the tasks in your list:
 1.[T][X] borrow book
 2.[D][ ] return book (by: Sunday)
 3.[D][ ] finish quiz 2 (by: Sunday 4pm)
 4.[E][ ] team meeting in school (from: 11am to: 4pm)
-
 ________________________________________________________
-
 
 ________________________________________________________
 Bye. Have a good day! Hope to see you again soon!

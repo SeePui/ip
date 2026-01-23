@@ -1,8 +1,7 @@
 import java.util.*;
 
 public class Pie {
-    private static final String chatbotName = "Pie";
-    private static final String line = "\n________________________________________________________\n";
+    private static final String line = "________________________________________________________\n";
     private static List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -12,45 +11,52 @@ public class Pie {
         while (true) {
             try {
                 String input = scanner.nextLine();
-                String command = Parser.parseCommand(input);
+                CommandType command = Parser.parseCommand(input);
 
-                if (command.equals("bye")) {
-                    byeMessage();
-                    break;
-                } else if (command.equals("list")) {
-                    printTasks();
-                } else if (command.equals("mark")) {
-                    markTask(Parser.parseMarkNumber(input));
-                } else if (command.equals("unmark")) {
-                    unmarkTask(Parser.parseUnmarkNumber(input));
-                } else if (command.equals("todo")) {
-                    addTodo(Parser.parseTodo(input));
-                } else if (command.equals("deadline")) {
-                    addDeadline(Parser.parseDeadline(input));
-                } else if (command.equals("event")) {
-                    addEvent(Parser.parseEvent(input));
-                } else if (command.equals("delete")) {
-                    deleteTask(Parser.parseDeleteNumber(input));
+                switch (command) {
+                    case BYE:
+                        byeMessage();
+                        scanner.close();
+                        return;
+                    case LIST:
+                        printTasks();
+                        break;
+                    case MARK:
+                        markTask(Parser.parseIndex(input));
+                        break;
+                    case UNMARK:
+                        unmarkTask(Parser.parseIndex(input));
+                        break;
+                    case TODO:
+                        addTodo(Parser.parseTodo(input));
+                        break;
+                    case DEADLINE:
+                        addDeadline(Parser.parseDeadline(input));
+                        break;
+                    case EVENT:
+                        addEvent(Parser.parseEvent(input));
+                        break;
+                    case DELETE:
+                        deleteTask(Parser.parseIndex(input));
+                        break;
                 }
             } catch (ParseException | NumberFormatException e) {
                 System.out.println(line + e.getMessage() + line);
             }
         }
-
-        scanner.close();
     }
 
     private static void startMessage() {
-        System.out.println(line + "Hello! I'm " + chatbotName + "\nWhat can I do for you? :)" + line);
+        System.out.println(line + BotMessage.START.get() + line);
     }
 
     private static void byeMessage() {
-        System.out.println(line + "Bye. Have a good day! Hope to see you again soon!" + line);
+        System.out.println(line + BotMessage.BYE.get() + line);
     }
 
     private static void printTasks() {
         if (taskList.isEmpty()) {
-            System.out.println(line + "There are no tasks in your list. Add tasks first!" + line);
+            System.out.println(line + BotMessage.EMPTY_LIST.get() + line);
             return;
         }
 
@@ -69,10 +75,9 @@ public class Pie {
             taskList.get(taskNumber).markDone();
             Task task = taskList.get(taskNumber);
             System.out.println(line + "Nice! I've marked this task as done:\n"
-                    + "  " + task.toString() + line);
+                    + "  " + task.toString() + "\n" + line);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(line + "OOPS!!! This specified task does not exist!"
-                    + "\nTry running list to check the available tasks." + line);
+            System.out.println(line + BotMessage.ERROR_INVALID_INDEX.get() + line);
         }
     }
 
@@ -81,10 +86,9 @@ public class Pie {
             taskList.get(taskNumber).unmarkDone();
             Task task = taskList.get(taskNumber);
             System.out.println(line + "OK, I've marked this task as not done yet:\n"
-                    + "  " + task.toString() + line);
+                    + "  " + task.toString() + "\n" + line);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(line + "OOPS!!! This specified task does not exist!"
-                    + "\nTry running list to check the available tasks." + line);
+            System.out.println(line + BotMessage.ERROR_INVALID_INDEX.get() + line);
         }
     }
 
@@ -93,21 +97,21 @@ public class Pie {
         taskList.add(newTodo);
         System.out.println(line + "Got it. I've added this task:\n"
                 + "  " + newTodo.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + line);
     }
 
     private static void addDeadline(Deadline newDeadline) {
         taskList.add(newDeadline);
         System.out.println(line + "Got it. I've added this task:\n"
                 + "  " + newDeadline.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + line);
     }
 
     private static void addEvent(Event newEvent) {
         taskList.add(newEvent);
         System.out.println(line + "Got it. I've added this task:\n"
                 + "  " + newEvent.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + line);
     }
 
     private static void deleteTask(int taskNumber) {
@@ -116,10 +120,9 @@ public class Pie {
             taskList.remove(taskNumber);
             System.out.println(line + "Noted. I've removed this task:\n"
                     + "  " + task.toString()
-                    + "\nNow you have " + taskList.size() + " tasks in the list." + line);
+                    + "\nNow you have " + taskList.size() + " tasks in the list.\n" + line);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(line + "OOPS!!! This specified task does not exist!"
-                    + "\nTry running list to check the available tasks." + line);
+            System.out.println(line + BotMessage.ERROR_INVALID_INDEX.get() + line);
         }
     }
 }
