@@ -1,23 +1,27 @@
 efnejfejfnef
 list
-todo borrow book
-deadline return book /by Sunday
-deadline finish quiz 2 /by Sunday 4pm
-event project meeting /from Mon 2pm /to tues 4pm
-event team meeting in school /from 11am /to 4pm
+todo problem set 2
+todo lecture training 4
+deadline reflection 1 /by 2026-02-09 1600
+deadline finish quiz 3 /by 2026-01-30 1600
+event project meeting /from 2026-02-04 2000 /to 2026-02-04 2100
+event group presentation /from 2026-02-09 1600 /to 2026-02-09 1800
 todo
-event team meeting in school /from  /to 4pm
+event team meeting in school /from  /to 2026-02-04 2100
 event team meeting in school /from 2pm /to
 deadline finish quiz 3 /by
 list
 mark rnr3
+mark -6
 mark 2
+mark 4
 mark 1
 list
 unmark 2
 list
 delete 10
 delete fnef
-delete 4
+delete 5
 list
+on 2026-02-09
 bye

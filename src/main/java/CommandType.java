@@ -6,7 +6,8 @@ public enum CommandType {
     DEADLINE,
     EVENT,
     DELETE,
-    BYE;
+    BYE,
+    ON;
 
     public static CommandType from(String input) throws ParseException {
         String command = input.trim().split("\\s+", 2)[0].toUpperCase();

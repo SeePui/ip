@@ -9,6 +9,10 @@ public enum BotMessage {
 
     ERROR_INVALID_FORMAT("Invalid command format.\n"),
 
+    ERROR_INVALID_DATE_FORMAT("Invalid date format. Use yyyy-MM-dd HHmm.\n"),
+
+    ERROR_INVALID_ON_DATE_FORMAT("Invalid date format. Use yyyy-MM-dd.\n"),
+
     ERROR_INVALID_INDEX("OOPS!!! This specified task does not exist!\nTry running list to check the available tasks.\n"),
 
     ERROR_NOT_NUMBER("Please provide a number.\n"),
@@ -19,7 +23,9 @@ public enum BotMessage {
 
     ERROR_UNKNOWN("OOPS!!! Something went wrong. Please try again.\n"),
 
-    EMPTY_LIST("There are no tasks in your list. Add tasks first!\n");
+    EMPTY_LIST("There are no tasks in your list. Add tasks first!\n"),
+
+    EMPTY_LIST_ON_DATE("There are no tasks in your list on this date!\n");
 
     private final String text;
 

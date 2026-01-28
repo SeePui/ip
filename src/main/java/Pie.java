@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,6 +46,8 @@ public class Pie {
                 case DELETE:
                     deleteTask(Parser.parseIndex(input));
                     break;
+                case ON:
+                    printTaskListOnDate(Parser.parseOnCommand(input));
                 }
             } catch (ParseException | NumberFormatException e) {
                 System.out.println(LINE + e.getMessage() + LINE);
@@ -151,6 +155,35 @@ public class Pie {
             System.out.println(LINE + "Noted. I've removed this task:\n"
                     + "  " + task.toString()
                     + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
+        }
+    }
+
+    private static void printTaskListOnDate(LocalDate date) {
+        try {
+            ArrayList<Task> result = new ArrayList<>();
+            for (Task task : taskList) {
+                if (task.occursOn(date)) {
+                    result.add(task);
+                }
+            }
+
+            if (result.isEmpty()) {
+                System.out.println(LINE + BotMessage.EMPTY_LIST_ON_DATE.get() + LINE);
+                return;
+            }
+
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            System.out.println(LINE + "Here are the tasks on " + date.format(dateFormat) + ":");
+
+            for (int i = 0; i < result.size(); i++) {
+                Task task = result.get(i);
+                System.out.println(i + 1 + "." + task.toString());
+                if (i == result.size() - 1) {
+                    System.out.println(LINE);
+                }
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
         }

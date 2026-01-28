@@ -13,32 +13,38 @@ ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [T][ ] borrow book
+  [T][ ] problem set 2
 Now you have 1 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [T][ ] lecture training 4
 Now you have 2 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [D][ ] finish quiz 2 (by: Sunday 4pm)
+  [D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
 Now you have 3 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: tues 4pm)
+  [D][ ] finish quiz 3 (by: Jan 30 2026, 4:00pm)
 Now you have 4 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
 Got it. I've added this task:
-  [E][ ] team meeting in school (from: 11am to: 4pm)
+  [E][ ] project meeting (from: Feb 04 2026, 8:00pm to: Feb 04 2026, 9:00pm)
 Now you have 5 tasks in the list.
+________________________________________________________
+
+________________________________________________________
+Got it. I've added this task:
+  [E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
+Now you have 6 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
@@ -48,64 +54,77 @@ ________________________________________________________
 
 ________________________________________________________
 Invalid command format.
-Use: event <description> /from <date> /to <date>
+Use: event <description> /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm
 ________________________________________________________
 
 ________________________________________________________
 Invalid command format.
-Use: event <description> /from <date> /to <date>
+Use: event <description> /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm
 ________________________________________________________
 
 ________________________________________________________
 Invalid command format.
-Use: deadline <description> /by <date>
+Use: deadline <description> /by yyyy-MM-dd HHmm
 ________________________________________________________
 
 ________________________________________________________
 Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[D][ ] finish quiz 2 (by: Sunday 4pm)
-4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
-5.[E][ ] team meeting in school (from: 11am to: 4pm)
+1.[T][ ] problem set 2
+2.[T][ ] lecture training 4
+3.[D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
+4.[D][ ] finish quiz 3 (by: Jan 30 2026, 4:00pm)
+5.[E][ ] project meeting (from: Feb 04 2026, 8:00pm to: Feb 04 2026, 9:00pm)
+6.[E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
 ________________________________________________________
 
 ________________________________________________________
 Invalid command format.
-Use: <command> <number>
+Use: <command> <positive number>
+________________________________________________________
+
+________________________________________________________
+Invalid command format.
+Use: <command> <positive number>
 ________________________________________________________
 
 ________________________________________________________
 Nice! I've marked this task as done:
-  [D][X] return book (by: Sunday)
+  [T][X] lecture training 4
 ________________________________________________________
 
 ________________________________________________________
 Nice! I've marked this task as done:
-  [T][X] borrow book
+  [D][X] finish quiz 3 (by: Jan 30 2026, 4:00pm)
+________________________________________________________
+
+________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] problem set 2
 ________________________________________________________
 
 ________________________________________________________
 Here are the tasks in your list:
-1.[T][X] borrow book
-2.[D][X] return book (by: Sunday)
-3.[D][ ] finish quiz 2 (by: Sunday 4pm)
-4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
-5.[E][ ] team meeting in school (from: 11am to: 4pm)
+1.[T][X] problem set 2
+2.[T][X] lecture training 4
+3.[D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
+4.[D][X] finish quiz 3 (by: Jan 30 2026, 4:00pm)
+5.[E][ ] project meeting (from: Feb 04 2026, 8:00pm to: Feb 04 2026, 9:00pm)
+6.[E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
 ________________________________________________________
 
 ________________________________________________________
 OK, I've marked this task as not done yet:
-  [D][ ] return book (by: Sunday)
+  [T][ ] lecture training 4
 ________________________________________________________
 
 ________________________________________________________
 Here are the tasks in your list:
-1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[D][ ] finish quiz 2 (by: Sunday 4pm)
-4.[E][ ] project meeting (from: Mon 2pm to: tues 4pm)
-5.[E][ ] team meeting in school (from: 11am to: 4pm)
+1.[T][X] problem set 2
+2.[T][ ] lecture training 4
+3.[D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
+4.[D][X] finish quiz 3 (by: Jan 30 2026, 4:00pm)
+5.[E][ ] project meeting (from: Feb 04 2026, 8:00pm to: Feb 04 2026, 9:00pm)
+6.[E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
 ________________________________________________________
 
 ________________________________________________________
@@ -115,21 +134,28 @@ ________________________________________________________
 
 ________________________________________________________
 Invalid command format.
-Use: <command> <number>
+Use: <command> <positive number>
 ________________________________________________________
 
 ________________________________________________________
 Noted. I've removed this task:
-  [E][ ] project meeting (from: Mon 2pm to: tues 4pm)
-Now you have 4 tasks in the list.
+  [E][ ] project meeting (from: Feb 04 2026, 8:00pm to: Feb 04 2026, 9:00pm)
+Now you have 5 tasks in the list.
 ________________________________________________________
 
 ________________________________________________________
 Here are the tasks in your list:
-1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[D][ ] finish quiz 2 (by: Sunday 4pm)
-4.[E][ ] team meeting in school (from: 11am to: 4pm)
+1.[T][X] problem set 2
+2.[T][ ] lecture training 4
+3.[D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
+4.[D][X] finish quiz 3 (by: Jan 30 2026, 4:00pm)
+5.[E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
+________________________________________________________
+
+________________________________________________________
+Here are the tasks on Feb 09 2026:
+1.[D][ ] reflection 1 (by: Feb 09 2026, 4:00pm)
+2.[E][ ] group presentation (from: Feb 09 2026, 4:00pm to: Feb 09 2026, 6:00pm)
 ________________________________________________________
 
 ________________________________________________________

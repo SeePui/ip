@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -34,5 +36,9 @@ public class Task {
 
     public String toSaveString() {
         return (isDone ? "1" : "0") + " | " + description;
+    }
+
+    public boolean occursOn(LocalDate date) {
+        return false;
     }
 }

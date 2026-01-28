@@ -1,20 +1,35 @@
-public class Event extends Task {
-    protected String start;
-    protected String end;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String start, String end) {
+public class Event extends Task {
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
+        DateTimeFormatter outputFormat =
+                DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
+
+        return "[E]" + super.toString()
+                + " (from: " + from.format(outputFormat)
+                + " to: " + to.format(outputFormat) + ")";
     }
 
     @Override
     public String toSaveString() {
-        return "E | " + (getIsDone() ? "1" : "0") + " | " + getDescription() + " | " + this.start + " | " + this.end;
+        return "E | " + (getIsDone() ? "1" : "0") + " | "
+                + getDescription() + " | " + from + " | " + to;
+    }
+
+    @Override
+    public boolean occursOn(LocalDate date) {
+        return from.toLocalDate().equals(date);
     }
 }
