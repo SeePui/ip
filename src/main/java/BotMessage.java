@@ -13,6 +13,12 @@ public enum BotMessage {
 
     ERROR_NOT_NUMBER("Please provide a number.\n"),
 
+    ERROR_LOAD_FAILED("Fail to load the saved tasks. Starting with an empty list.\n"),
+
+    ERROR_SAVE_FAILED("Fail to save tasks to disk.\n"),
+
+    ERROR_UNKNOWN("OOPS!!! Something went wrong. Please try again.\n"),
+
     EMPTY_LIST("There are no tasks in your list. Add tasks first!\n");
 
     private final String text;

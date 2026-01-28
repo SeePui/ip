@@ -4,10 +4,13 @@ import java.util.Scanner;
 
 public class Pie {
     private static final String LINE = "________________________________________________________\n";
-    private static List<Task> taskList = new ArrayList<>();
+    private static List<Task> taskList;
+    private static final Storage storage = new Storage();
 
     public static void main(String[] args) {
         startMessage();
+        loadTasks();
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -44,7 +47,26 @@ public class Pie {
                 }
             } catch (ParseException | NumberFormatException e) {
                 System.out.println(LINE + e.getMessage() + LINE);
+            } catch (Exception e) {
+                System.out.println(LINE + BotMessage.ERROR_UNKNOWN.get() + LINE);
             }
+        }
+    }
+
+    private static void loadTasks() {
+        try {
+            taskList = storage.load();
+        } catch (Exception e) {
+            System.out.println(LINE + BotMessage.ERROR_LOAD_FAILED.get() + LINE);
+            taskList = new ArrayList<>();
+        }
+    }
+
+    private static void saveTasks() {
+        try {
+            storage.save(taskList);
+        } catch (Exception e) {
+            System.out.println(LINE + BotMessage.ERROR_SAVE_FAILED.get() + LINE);
         }
     }
 
@@ -74,8 +96,9 @@ public class Pie {
 
     private static void markTask(int taskNumber) {
         try {
-            taskList.get(taskNumber).markDone();
             Task task = taskList.get(taskNumber);
+            task.markDone();
+            saveTasks();
             System.out.println(LINE + "Nice! I've marked this task as done:\n"
                     + "  " + task.toString() + "\n" + LINE);
         } catch (IndexOutOfBoundsException e) {
@@ -85,8 +108,9 @@ public class Pie {
 
     private static void unmarkTask(int taskNumber) {
         try {
-            taskList.get(taskNumber).unmarkDone();
             Task task = taskList.get(taskNumber);
+            task.unmarkDone();
+            saveTasks();
             System.out.println(LINE + "OK, I've marked this task as not done yet:\n"
                     + "  " + task.toString() + "\n" + LINE);
         } catch (IndexOutOfBoundsException e) {
@@ -97,6 +121,7 @@ public class Pie {
     private static void addTodo(String description) {
         Todo newTodo = new Todo(description);
         taskList.add(newTodo);
+        saveTasks();
         System.out.println(LINE + "Got it. I've added this task:\n"
                 + "  " + newTodo.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
@@ -104,6 +129,7 @@ public class Pie {
 
     private static void addDeadline(Deadline newDeadline) {
         taskList.add(newDeadline);
+        saveTasks();
         System.out.println(LINE + "Got it. I've added this task:\n"
                 + "  " + newDeadline.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
@@ -111,6 +137,7 @@ public class Pie {
 
     private static void addEvent(Event newEvent) {
         taskList.add(newEvent);
+        saveTasks();
         System.out.println(LINE + "Got it. I've added this task:\n"
                 + "  " + newEvent.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
@@ -120,6 +147,7 @@ public class Pie {
         try {
             Task task = taskList.get(taskNumber);
             taskList.remove(taskNumber);
+            saveTasks();
             System.out.println(LINE + "Noted. I've removed this task:\n"
                     + "  " + task.toString()
                     + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
