@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,5 +22,10 @@ public class Deadline extends Task {
     public String toSaveString() {
         return "D | " + (getIsDone() ? "1" : "0") + " | "
                 + getDescription() + " | " + by;
+    }
+
+    @Override
+    public boolean occursOn(LocalDate date) {
+        return by.toLocalDate().equals(date);
     }
 }

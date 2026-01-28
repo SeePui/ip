@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,5 +26,10 @@ public class Event extends Task {
     public String toSaveString() {
         return "E | " + (getIsDone() ? "1" : "0") + " | "
                 + getDescription() + " | " + from + " | " + to;
+    }
+
+    @Override
+    public boolean occursOn(LocalDate date) {
+        return from.toLocalDate().equals(date);
     }
 }

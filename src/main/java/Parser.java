@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,6 +10,7 @@ public class Parser {
     private static final String TODO_REGEX = "^todo\\s+(.*)$";
     private static final String DEADLINE_REGEX = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
+    private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
 
     public static CommandType parseCommand(String input)
             throws ParseException {
@@ -87,6 +89,22 @@ public class Parser {
             return new Event(description, from, to);
         } catch (DateTimeParseException e) {
             throw new ParseException(BotMessage.ERROR_INVALID_DATE_FORMAT.get());
+        }
+    }
+
+    public static LocalDate parseOnCommand(String input)
+            throws ParseException {
+        Matcher m = Pattern.compile(ON_REGEX).matcher(input.trim());
+        if (!m.matches()) {
+            throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
+                    + "Use: on yyyy-MM-dd\n");
+        }
+
+        try {
+            String dateStr = m.group(1);
+            return LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(BotMessage.ERROR_INVALID_ON_DATE_FORMAT.get());
         }
     }
 }
