@@ -11,9 +11,9 @@ public enum BotMessage {
 
     ERROR_INVALID_INDEX("OOPS!!! This specified task does not exist!\nTry running list to check the available tasks.\n"),
 
-    EMPTY_LIST("There are no tasks in your list. Add tasks first!\n"),
+    ERROR_NOT_NUMBER("Please provide a number.\n"),
 
-    ERROR_NOT_NUMBER("Please provide a number.\n");
+    EMPTY_LIST("There are no tasks in your list. Add tasks first!\n");
 
     private final String text;
 

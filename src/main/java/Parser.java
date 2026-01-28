@@ -1,4 +1,5 @@
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
     private static final String INDEX_REGEX = "^(mark|unmark|delete)\\s+(\\d+)$";
@@ -6,14 +7,16 @@ public class Parser {
     private static final String DEADLINE_REGEX = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
 
-    public static CommandType parseCommand(String input) throws ParseException {
+    public static CommandType parseCommand(String input)
+            throws ParseException {
         if (input == null || input.trim().isEmpty()) {
             throw new ParseException(BotMessage.ERROR_EMPTY_COMMAND.get());
         }
         return CommandType.from(input);
     }
 
-    public static int parseIndex(String input) throws ParseException {
+    public static int parseIndex(String input)
+            throws ParseException {
         Matcher m = Pattern.compile(INDEX_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -29,8 +32,7 @@ public class Parser {
     }
 
 
-    public static String parseTodo(String input)
-            throws ParseException {
+    public static String parseTodo(String input) throws ParseException {
         Matcher m = Pattern.compile(TODO_REGEX).matcher(input.trim());
 
         if (m.matches()) {
