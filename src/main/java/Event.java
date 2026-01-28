@@ -12,4 +12,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return "E | " + (getIsDone() ? "1" : "0") + " | " + getDescription() + " | " + this.start + " | " + this.end;
+    }
 }

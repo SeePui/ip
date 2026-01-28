@@ -15,6 +15,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     public void markDone() {
         this.isDone = true;
     }
@@ -26,5 +30,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
+    }
+
+    public String toSaveString() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 }

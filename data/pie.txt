@@ -1,0 +1,4 @@
+T | 1 | borrow book
+D | 0 | return book | Sunday
+D | 1 | finish quiz 2 | Sunday 4pm
+E | 0 | team meeting in school | 11am | 4pm
