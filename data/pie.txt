@@ -1,4 +1,5 @@
-T | 1 | borrow book
-D | 0 | return book | Sunday
-D | 1 | finish quiz 2 | Sunday 4pm
-E | 0 | team meeting in school | 11am | 4pm
+T | 1 | problem set 2
+T | 0 | lecture training 4
+D | 0 | reflection 1 | 2026-02-09T16:00
+D | 1 | finish quiz 3 | 2026-01-30T16:00
+E | 0 | group presentation | 2026-02-09T16:00 | 2026-02-09T18:00
