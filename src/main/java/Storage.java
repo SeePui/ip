@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +52,15 @@ public class Storage {
 
             Task task = switch (taskType) {
                 case "T" -> new Todo(parts[2]);
-                case "D" -> new Deadline(parts[2], parts[3]);
-                case "E" -> new Event(parts[2], parts[3], parts[4]);
+                case "D" -> {
+                    LocalDateTime by = LocalDateTime.parse(parts[3]);
+                    yield new Deadline(parts[2], by);
+                }
+                case "E" -> {
+                    LocalDateTime from = LocalDateTime.parse(parts[3]);
+                    LocalDateTime to = LocalDateTime.parse(parts[3]);
+                    yield new Event(parts[2], from, to);
+                }
                 default -> throw new IllegalArgumentException();
             };
 

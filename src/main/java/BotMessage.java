@@ -9,6 +9,8 @@ public enum BotMessage {
 
     ERROR_INVALID_FORMAT("Invalid command format.\n"),
 
+    ERROR_INVALID_DATE_FORMAT("Invalid date format. Use yyyy-MM-dd HHmm.\n"),
+
     ERROR_INVALID_INDEX("OOPS!!! This specified task does not exist!\nTry running list to check the available tasks.\n"),
 
     ERROR_NOT_NUMBER("Please provide a number.\n"),

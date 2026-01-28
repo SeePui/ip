@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +24,7 @@ public class Parser {
 
         if (!m.matches()) {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
-                    + "Use: <command> <number>\n");
+                    + "Use: <command> <positive number>\n");
         }
 
         try {
@@ -47,11 +50,20 @@ public class Parser {
             throws ParseException {
         Matcher m = Pattern.compile(DEADLINE_REGEX).matcher(input.trim());
 
-        if (m.matches()) {
-            return new Deadline(m.group(1), m.group(2));
-        } else {
+        if (!m.matches()) {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
-                    + "Use: deadline <description> /by <date>\n");
+                    + "Use: deadline <description> /by yyyy-MM-dd HHmm\n");
+        }
+
+        try {
+            String description = m.group(1);
+            String byStr = m.group(2);
+
+            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime by = LocalDateTime.parse(byStr, customFormat);
+            return new Deadline(description, by);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(BotMessage.ERROR_INVALID_DATE_FORMAT.get());
         }
     }
 
@@ -59,11 +71,22 @@ public class Parser {
             throws ParseException {
         Matcher m = Pattern.compile(EVENT_REGEX).matcher(input.trim());
 
-        if (m.matches()) {
-            return new Event(m.group(1), m.group(2), m.group(3));
-        } else {
+        if (!m.matches()) {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
-                    + "Use: event <description> /from <date> /to <date>\n");
+                    + "Use: event <description> /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm\n");
+        }
+
+        try {
+            String description = m.group(1);
+            String fromStr = m.group(2);
+            String toStr = m.group(3);
+
+            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime from = LocalDateTime.parse(fromStr, customFormat);
+            LocalDateTime to = LocalDateTime.parse(toStr, customFormat);
+            return new Event(description, from, to);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(BotMessage.ERROR_INVALID_DATE_FORMAT.get());
         }
     }
 }
