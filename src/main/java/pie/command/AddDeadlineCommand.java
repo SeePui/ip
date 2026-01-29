@@ -1,3 +1,12 @@
+package pie.command;
+
+import pie.exception.StorageException;
+import pie.storage.Storage;
+import pie.task.Deadline;
+import pie.task.Task;
+import pie.task.TaskList;
+import pie.ui.Ui;
+
 public class AddDeadlineCommand extends Command {
     private final Deadline deadline;
 

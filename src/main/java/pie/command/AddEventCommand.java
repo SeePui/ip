@@ -1,3 +1,12 @@
+package pie.command;
+
+import pie.exception.StorageException;
+import pie.storage.Storage;
+import pie.task.Event;
+import pie.task.Task;
+import pie.task.TaskList;
+import pie.ui.Ui;
+
 public class AddEventCommand extends Command {
     private final Event event;
 
