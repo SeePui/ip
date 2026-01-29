@@ -12,12 +12,27 @@ public class Parser {
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
     private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
 
-    public static CommandType parseCommand(String input)
+    public static Command parseCommand(String input)
             throws ParseException {
         if (input == null || input.trim().isEmpty()) {
             throw new ParseException(BotMessage.ERROR_EMPTY_COMMAND.get());
         }
-        return CommandType.from(input);
+
+        String[] parts = input.trim().split("\\s+", 2);
+        String commandType = parts[0].toLowerCase();
+
+        return switch (commandType) {
+            case "bye" -> new ExitCommand();
+            case "list" -> new ListCommand();
+            case "mark" -> new MarkCommand(parseIndex(input));
+            case "unmark" -> new UnmarkCommand(parseIndex(input));
+            case "delete" -> new DeleteCommand(parseIndex(input));
+            case "todo" -> new AddTodoCommand(parseTodo(input));
+            case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
+            case "event" -> new AddEventCommand(parseEvent(input));
+            case "on" -> new OnCommand(parseOnCommand(input));
+            default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
+        };
     }
 
     public static int parseIndex(String input)

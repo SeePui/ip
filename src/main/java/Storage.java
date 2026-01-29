@@ -9,46 +9,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final String LINE = "________________________________________________________\n";
     private static final Path FILE_PATH = Paths.get("data", "pie.txt");
 
-    public List<Task> load() {
+    public List<Task> load() throws StorageException {
         List<Task> tasks = new ArrayList<>();
 
         try {
             Path directory = FILE_PATH.getParent();
             if (directory != null && !Files.exists(directory)) {
-//                System.out.println("Directory doesn't exist");
                 Files.createDirectories(directory);
             }
 
             if (!Files.exists(FILE_PATH)) {
-//                System.out.println("File doesn't exist");
                 Files.createFile(FILE_PATH);
                 return tasks;
             }
 
             List<String> lines = Files.readAllLines(FILE_PATH);
             for (String line : lines) {
-                Task task = parseTask(line);
-                if (task != null) {
-                    tasks.add(task);
+                try {
+                    tasks.add(parseTask(line));
+                } catch (StorageException e) {
+                    Ui ui = new Ui();
+                    ui.printError(e.getMessage());
                 }
             }
 
         } catch (IOException e) {
-            System.out.println(LINE + BotMessage.ERROR_LOAD_FAILED.get() + LINE);
+            throw new StorageException(BotMessage.ERROR_LOAD_FAILED.get());
         }
 
         return tasks;
     }
 
-    public Task parseTask(String input) {
+    public Task parseTask(String input) throws StorageException {
         try {
             String[] parts = input.split("\\s*\\|\\s*");
 
             String taskType = parts[0];
-            int isDone = Integer.parseInt(parts[1]);
+            boolean isDone = parts[1].equals("1");
 
             Task task = switch (taskType) {
                 case "T" -> new Todo(parts[2]);
@@ -58,27 +57,27 @@ public class Storage {
                 }
                 case "E" -> {
                     LocalDateTime from = LocalDateTime.parse(parts[3]);
-                    LocalDateTime to = LocalDateTime.parse(parts[3]);
+                    LocalDateTime to = LocalDateTime.parse(parts[4]);
                     yield new Event(parts[2], from, to);
                 }
-                default -> throw new IllegalArgumentException();
+                default -> throw new IllegalArgumentException("Skipping unknown task type: " + input + "\n");
             };
 
-            if (isDone == 1) {
+            if (isDone) {
                 task.markDone();
             }
 
             return task;
 
+        } catch (IllegalArgumentException iea) {
+            throw new StorageException(iea.getMessage());
         } catch (Exception e) {
-            System.out.println(LINE + "Skipping corrupted line: " + input + "\n" + LINE);
-            return null;
+            throw new StorageException("Skipping corrupted line: " + input + "\n");
         }
     }
 
-    public void save(List<Task> tasks) {
+    public void save(List<Task> tasks) throws StorageException {
         try {
-//            System.out.println("Saving tasks:");
             List<String> lines = new ArrayList<>();
             for (Task task : tasks) {
                 lines.add(task.toSaveString());
@@ -86,7 +85,7 @@ public class Storage {
 
             Files.write(FILE_PATH, lines);
         } catch (IOException e) {
-            System.out.println(LINE + BotMessage.ERROR_SAVE_FAILED.get() + LINE);
+            throw new StorageException(BotMessage.ERROR_SAVE_FAILED.get());
         }
     }
 }
