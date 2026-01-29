@@ -18,9 +18,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles loading and saving tasks to persistent storage.
+ *
+ * <p>
+ * Tasks are stored in a text file located at {@code data/pie.txt}.
+ * Each task is saved in a single line. This class is responsible for
+ * converting between file data and in-memory {@link Task} objects.
+ * </p>
+ */
 public class Storage {
     private static final Path FILE_PATH = Paths.get("data", "pie.txt");
 
+    /**
+     * Loads the tasks from the storage file.
+     *
+     * <p>
+     * If the storage directory or file does not exist, they will be created.
+     * Corrupted or invalid task lines are skipped with an error message shown
+     * to the user.
+     * </p>
+     *
+     * @return A list of tasks loaded from storage
+     * @throws StorageException If an I/O error occurs while reading the file
+     */
     public List<Task> load() throws StorageException {
         List<Task> tasks = new ArrayList<>();
 
@@ -52,6 +73,22 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Parses a single line from the storage file into a Task object.
+     *
+     * <p>
+     * Expected formats:
+     * <ul>
+     *   <li>{@code T | isDone | description}</li>
+     *   <li>{@code D | isDone | description | by}</li>
+     *   <li>{@code E | isDone | description | from | to}</li>
+     * </ul>
+     * </p>
+     *
+     * @param input A single line from the storage file
+     * @return Parsed Task object
+     * @throws StorageException If the line is invalid or corrupted
+     */
     public Task parseTask(String input) throws StorageException {
         try {
             String[] parts = input.split("\\s*\\|\\s*");
@@ -86,6 +123,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all tasks to the storage file.
+     *
+     * <p>
+     * Each task is converted to its storage string format using
+     * {@link Task#toSaveString()} before being written to disk.
+     * </p>
+     *
+     * @param tasks List of tasks to save
+     * @throws StorageException If an I/O error occurs while writing the file
+     */
     public void save(List<Task> tasks) throws StorageException {
         try {
             List<String> lines = new ArrayList<>();

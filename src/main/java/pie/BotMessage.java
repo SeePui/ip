@@ -1,5 +1,12 @@
 package pie;
 
+/**
+ * Represents predefined user-facing messages used by the Pie application.
+ *
+ * <p>
+ * Each enum constant stores a message string that can be displayed to the user.
+ * </p>
+ */
 public enum BotMessage {
     START("Hello! I'm Pie\nWhat can I do for you? :)\n"),
 
@@ -31,6 +38,11 @@ public enum BotMessage {
 
     private final String text;
 
+    /**
+     * Constructs a BotMessage with the given message text.
+     *
+     * @param text Message string associated with the enum constant
+     */
     BotMessage(String text) {
         this.text = text;
     }
