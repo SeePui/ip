@@ -20,8 +20,7 @@ public class Parser {
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
     private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
 
-    public static Command parseCommand(String input)
-            throws ParseException {
+    public static Command parseCommand(String input) throws ParseException {
         if (input == null || input.trim().isEmpty()) {
             throw new ParseException(BotMessage.ERROR_EMPTY_COMMAND.get());
         }
@@ -43,8 +42,7 @@ public class Parser {
         };
     }
 
-    public static int parseIndex(String input)
-            throws ParseException {
+    public static int parseIndex(String input) throws ParseException {
         Matcher m = Pattern.compile(INDEX_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -71,8 +69,7 @@ public class Parser {
         }
     }
 
-    public static Deadline parseDeadline(String input)
-            throws ParseException {
+    public static Deadline parseDeadline(String input) throws ParseException {
         Matcher m = Pattern.compile(DEADLINE_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -92,8 +89,7 @@ public class Parser {
         }
     }
 
-    public static Event parseEvent(String input)
-            throws ParseException {
+    public static Event parseEvent(String input) throws ParseException {
         Matcher m = Pattern.compile(EVENT_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -115,8 +111,7 @@ public class Parser {
         }
     }
 
-    public static LocalDate parseOnCommand(String input)
-            throws ParseException {
+    public static LocalDate parseOnCommand(String input) throws ParseException {
         Matcher m = Pattern.compile(ON_REGEX).matcher(input.trim());
         if (!m.matches()) {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()

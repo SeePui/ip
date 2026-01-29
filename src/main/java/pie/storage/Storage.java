@@ -68,7 +68,8 @@ public class Storage {
                     LocalDateTime to = LocalDateTime.parse(parts[4]);
                     yield new Event(parts[2], from, to);
                 }
-                default -> throw new IllegalArgumentException("Skipping unknown task type: " + input + "\n");
+                default -> throw new IllegalArgumentException(
+                        "Skipping unknown task type: " + input + "\n");
             };
 
             if (isDone) {

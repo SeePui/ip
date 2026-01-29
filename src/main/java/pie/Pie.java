@@ -41,7 +41,8 @@ public class Pie {
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
 
-            } catch (ParseException | NumberFormatException | StorageException | IndexOutOfBoundsException e) {
+            } catch (ParseException | NumberFormatException |
+                     StorageException | IndexOutOfBoundsException e) {
                 ui.printError(e.getMessage());
             } catch (Exception e) {
                 ui.printError(BotMessage.ERROR_UNKNOWN.get());

@@ -24,29 +24,23 @@ public class Ui {
     }
 
     public void printTaskAdded(Task task, int size) {
-        System.out.println(LINE +
-                "Got it. I've added this task:\n  " + task +
-                "\nNow you have " + size + " tasks in the list.\n" +
-                LINE);
+        System.out.println(LINE + "Got it. I've added this task:\n" + task
+                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
     }
 
     public void printTaskDeleted(Task task, int size) {
-        System.out.println(LINE +
-                "Noted. I've removed this task:\n  " + task +
-                "\nNow you have " + size + " tasks in the list.\n" +
-                LINE);
+        System.out.println(LINE + "Noted. I've removed this task:\n" + task
+                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
     }
 
     public void printTaskMarked(Task task) {
-        System.out.println(LINE +
-                "Nice! I've marked this task as done:\n  " + task +
-                "\n" + LINE);
+        System.out.println(LINE + "Nice! I've marked this task as done:\n"
+                + task + "\n" + LINE);
     }
 
     public void printTaskUnmarked(Task task) {
-        System.out.println(LINE +
-                "OK, I've marked this task as not done yet:\n  " + task +
-                "\n" + LINE);
+        System.out.println(LINE + "OK, I've marked this task as not done yet:\n"
+                + task + "\n" + LINE);
     }
 
     public void printTaskList(List<Task> tasks) {
