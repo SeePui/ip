@@ -1,21 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Pie {
-    private static final String LINE = "________________________________________________________\n";
     private final Storage storage;
     private final TaskList taskList;
+    private final Ui ui;
 
     public Pie() {
-        startMessage();
+        ui = new Ui();
         storage = new Storage();
+
+        ui.printWelcome();
 
         TaskList loadedTaskList;
         try {
             loadedTaskList = new TaskList(storage.load());
         } catch (StorageException e) {
-            System.out.println(LINE + e.getMessage() + LINE);
+            ui.printError(e.getMessage());
             loadedTaskList = new TaskList();
         }
         taskList = loadedTaskList;
@@ -31,53 +35,53 @@ public class Pie {
 
                 switch (command) {
                 case BYE:
-                    byeMessage();
+                    ui.printBye();
                     scanner.close();
                     return;
                 case LIST:
-                    taskList.printTaskList();
+                    ui.printTaskList(taskList.getAllTasks());
                     break;
                 case MARK:
-                    taskList.markTask(Parser.parseIndex(input));
-                    storage.save(taskList.getTasks());
+                    Task mt = taskList.markTask(Parser.parseIndex(input));
+                    ui.printTaskMarked(mt);
+                    storage.save(taskList.getAllTasks());
                     break;
                 case UNMARK:
-                    taskList.unmarkTask(Parser.parseIndex(input));
-                    storage.save(taskList.getTasks());
+                    Task umt = taskList.unmarkTask(Parser.parseIndex(input));
+                    ui.printTaskUnmarked(umt);
+                    storage.save(taskList.getAllTasks());
                     break;
                 case TODO:
-                    taskList.addTodo(Parser.parseTodo(input));
-                    storage.save(taskList.getTasks());
+                    Task todo = taskList.addTodo(Parser.parseTodo(input));
+                    ui.printTaskAdded(todo, taskList.getSize());
+                    storage.save(taskList.getAllTasks());
                     break;
                 case DEADLINE:
-                    taskList.addDeadline(Parser.parseDeadline(input));
-                    storage.save(taskList.getTasks());
+                    Task deadline = taskList.addDeadline(Parser.parseDeadline(input));
+                    ui.printTaskAdded(deadline, taskList.getSize());
+                    storage.save(taskList.getAllTasks());
                     break;
                 case EVENT:
-                    taskList.addEvent(Parser.parseEvent(input));
-                    storage.save(taskList.getTasks());
+                    Task event = taskList.addEvent(Parser.parseEvent(input));
+                    ui.printTaskAdded(event, taskList.getSize());
+                    storage.save(taskList.getAllTasks());
                     break;
                 case DELETE:
-                    taskList.deleteTask(Parser.parseIndex(input));
-                    storage.save(taskList.getTasks());
+                    Task dt = taskList.deleteTask(Parser.parseIndex(input));
+                    ui.printTaskDeleted(dt, taskList.getSize());
+                    storage.save(taskList.getAllTasks());
                     break;
                 case ON:
-                    taskList.printTaskListOnDate(Parser.parseOnCommand(input));
+                    LocalDate inputDate = Parser.parseOnCommand(input);
+                    List<Task> result = taskList.getTasksOnDate(inputDate);
+                    ui.printTasksOnDate(inputDate, result);
                 }
-            } catch (ParseException | NumberFormatException | StorageException e) {
-                System.out.println(LINE + e.getMessage() + LINE);
+            } catch (ParseException | NumberFormatException | StorageException | IndexOutOfBoundsException e) {
+                ui.printError(e.getMessage());
             } catch (Exception e) {
-                System.out.println(LINE + BotMessage.ERROR_UNKNOWN.get() + LINE);
+                ui.printError(BotMessage.ERROR_UNKNOWN.get());
             }
         }
-    }
-
-    private static void startMessage() {
-        System.out.println(LINE + BotMessage.START.get() + LINE);
-    }
-
-    private static void byeMessage() {
-        System.out.println(LINE + BotMessage.BYE.get() + LINE);
     }
 
     public static void main(String[] args) {

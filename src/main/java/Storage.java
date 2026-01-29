@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final String LINE = "________________________________________________________\n";
     private static final Path FILE_PATH = Paths.get("data", "pie.txt");
 
     public List<Task> load() throws StorageException {
@@ -31,7 +30,8 @@ public class Storage {
                 try {
                     tasks.add(parseTask(line));
                 } catch (StorageException e) {
-                    System.out.println(LINE + e.getMessage() + LINE);
+                    Ui ui = new Ui();
+                    ui.printError(e.getMessage());
                 }
             }
 
