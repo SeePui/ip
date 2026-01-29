@@ -1,3 +1,5 @@
+package pie;
+
 public enum BotMessage {
     START("Hello! I'm Pie\nWhat can I do for you? :)\n"),
 

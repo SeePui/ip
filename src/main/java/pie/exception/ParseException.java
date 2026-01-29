@@ -1,3 +1,5 @@
+package pie.exception;
+
 public class ParseException extends Exception {
     public ParseException(String description) {
         super(description);
