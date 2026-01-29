@@ -1,18 +1,27 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Pie {
     private static final String LINE = "________________________________________________________\n";
-    private static List<Task> taskList;
-    private static final Storage storage = new Storage();
+    private final Storage storage;
+    private final TaskList taskList;
 
-    public static void main(String[] args) {
+    public Pie() {
         startMessage();
-        loadTasks();
+        storage = new Storage();
 
+        TaskList loadedTaskList;
+        try {
+            loadedTaskList = new TaskList(storage.load());
+        } catch (StorageException e) {
+            System.out.println(LINE + e.getMessage() + LINE);
+            loadedTaskList = new TaskList();
+        }
+        taskList = loadedTaskList;
+    }
+
+    public void run() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -26,51 +35,40 @@ public class Pie {
                     scanner.close();
                     return;
                 case LIST:
-                    printTaskList();
+                    taskList.printTaskList();
                     break;
                 case MARK:
-                    markTask(Parser.parseIndex(input));
+                    taskList.markTask(Parser.parseIndex(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case UNMARK:
-                    unmarkTask(Parser.parseIndex(input));
+                    taskList.unmarkTask(Parser.parseIndex(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case TODO:
-                    addTodo(Parser.parseTodo(input));
+                    taskList.addTodo(Parser.parseTodo(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case DEADLINE:
-                    addDeadline(Parser.parseDeadline(input));
+                    taskList.addDeadline(Parser.parseDeadline(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case EVENT:
-                    addEvent(Parser.parseEvent(input));
+                    taskList.addEvent(Parser.parseEvent(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case DELETE:
-                    deleteTask(Parser.parseIndex(input));
+                    taskList.deleteTask(Parser.parseIndex(input));
+                    storage.save(taskList.getTasks());
                     break;
                 case ON:
-                    printTaskListOnDate(Parser.parseOnCommand(input));
+                    taskList.printTaskListOnDate(Parser.parseOnCommand(input));
                 }
-            } catch (ParseException | NumberFormatException e) {
+            } catch (ParseException | NumberFormatException | StorageException e) {
                 System.out.println(LINE + e.getMessage() + LINE);
             } catch (Exception e) {
                 System.out.println(LINE + BotMessage.ERROR_UNKNOWN.get() + LINE);
             }
-        }
-    }
-
-    private static void loadTasks() {
-        try {
-            taskList = storage.load();
-        } catch (Exception e) {
-            System.out.println(LINE + BotMessage.ERROR_LOAD_FAILED.get() + LINE);
-            taskList = new ArrayList<>();
-        }
-    }
-
-    private static void saveTasks() {
-        try {
-            storage.save(taskList);
-        } catch (Exception e) {
-            System.out.println(LINE + BotMessage.ERROR_SAVE_FAILED.get() + LINE);
         }
     }
 
@@ -82,110 +80,7 @@ public class Pie {
         System.out.println(LINE + BotMessage.BYE.get() + LINE);
     }
 
-    private static void printTaskList() {
-        if (taskList.isEmpty()) {
-            System.out.println(LINE + BotMessage.EMPTY_LIST.get() + LINE);
-            return;
-        }
-
-        System.out.println(LINE + "Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            System.out.println(i + 1 + "." + task.toString());
-            if (i == taskList.size() - 1) {
-                System.out.println(LINE);
-            }
-        }
-    }
-
-    private static void markTask(int taskNumber) {
-        try {
-            Task task = taskList.get(taskNumber);
-            task.markDone();
-            saveTasks();
-            System.out.println(LINE + "Nice! I've marked this task as done:\n"
-                    + "  " + task.toString() + "\n" + LINE);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
-        }
-    }
-
-    private static void unmarkTask(int taskNumber) {
-        try {
-            Task task = taskList.get(taskNumber);
-            task.unmarkDone();
-            saveTasks();
-            System.out.println(LINE + "OK, I've marked this task as not done yet:\n"
-                    + "  " + task.toString() + "\n" + LINE);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
-        }
-    }
-
-    private static void addTodo(String description) {
-        Todo newTodo = new Todo(description);
-        taskList.add(newTodo);
-        saveTasks();
-        System.out.println(LINE + "Got it. I've added this task:\n"
-                + "  " + newTodo.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
-    }
-
-    private static void addDeadline(Deadline newDeadline) {
-        taskList.add(newDeadline);
-        saveTasks();
-        System.out.println(LINE + "Got it. I've added this task:\n"
-                + "  " + newDeadline.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
-    }
-
-    private static void addEvent(Event newEvent) {
-        taskList.add(newEvent);
-        saveTasks();
-        System.out.println(LINE + "Got it. I've added this task:\n"
-                + "  " + newEvent.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
-    }
-
-    private static void deleteTask(int taskNumber) {
-        try {
-            Task task = taskList.get(taskNumber);
-            taskList.remove(taskNumber);
-            saveTasks();
-            System.out.println(LINE + "Noted. I've removed this task:\n"
-                    + "  " + task.toString()
-                    + "\nNow you have " + taskList.size() + " tasks in the list.\n" + LINE);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
-        }
-    }
-
-    private static void printTaskListOnDate(LocalDate date) {
-        try {
-            ArrayList<Task> result = new ArrayList<>();
-            for (Task task : taskList) {
-                if (task.occursOn(date)) {
-                    result.add(task);
-                }
-            }
-
-            if (result.isEmpty()) {
-                System.out.println(LINE + BotMessage.EMPTY_LIST_ON_DATE.get() + LINE);
-                return;
-            }
-
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            System.out.println(LINE + "Here are the tasks on " + date.format(dateFormat) + ":");
-
-            for (int i = 0; i < result.size(); i++) {
-                Task task = result.get(i);
-                System.out.println(i + 1 + "." + task.toString());
-                if (i == result.size() - 1) {
-                    System.out.println(LINE);
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(LINE + BotMessage.ERROR_INVALID_INDEX.get() + LINE);
-        }
+    public static void main(String[] args) {
+        new Pie().run();
     }
 }
