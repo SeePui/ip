@@ -57,7 +57,7 @@ public class Storage {
                 }
                 case "E" -> {
                     LocalDateTime from = LocalDateTime.parse(parts[3]);
-                    LocalDateTime to = LocalDateTime.parse(parts[3]);
+                    LocalDateTime to = LocalDateTime.parse(parts[4]);
                     yield new Event(parts[2], from, to);
                 }
                 default -> throw new IllegalArgumentException("Skipping unknown task type: " + input + "\n");
