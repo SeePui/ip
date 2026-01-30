@@ -8,9 +8,17 @@ import pie.ui.Ui;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a command that lists all tasks occurring on a specific date.
+ */
 public class OnCommand extends Command {
     private final LocalDate date;
 
+    /**
+     * Instantiates a new {@code OnCommand} with the specified date.
+     *
+     * @param date The date to filter tasks by.
+     */
     public OnCommand(LocalDate date) {
         this.date = date;
     }

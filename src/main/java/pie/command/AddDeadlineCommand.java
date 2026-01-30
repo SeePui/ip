@@ -7,9 +7,17 @@ import pie.task.Task;
 import pie.task.TaskList;
 import pie.ui.Ui;
 
+/**
+ * Represents a command that adds a {@link Deadline} task to the task list.
+ */
 public class AddDeadlineCommand extends Command {
     private final Deadline deadline;
 
+    /**
+     * Instantiates a new {@code AddDeadlineCommand} with the specified deadline task.
+     *
+     * @param deadline The {@link Deadline} task to be added.
+     */
     public AddDeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }

@@ -13,6 +13,16 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parses user input into executable commands and task objects.
+ *
+ * <p>
+ * This class is responsible for validating user input, extracting
+ * required parameters, and constructing appropriate {@link Command}
+ * objects. All parsing-related errors are reported using
+ * {@link ParseException}.
+ * </p>
+ */
 public class Parser {
     private static final String INDEX_REGEX = "^(mark|unmark|delete)\\s+(\\d+)$";
     private static final String TODO_REGEX = "^todo\\s+(.*)$";
@@ -20,6 +30,13 @@ public class Parser {
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
     private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
 
+    /**
+     * Parses the user input and returns the corresponding Command.
+     *
+     * @param input Raw user input
+     * @return A Command object representing the user instruction
+     * @throws ParseException If the command is empty, invalid, or unsupported
+     */
     public static Command parseCommand(String input)
             throws ParseException {
         if (input == null || input.trim().isEmpty()) {
@@ -43,6 +60,17 @@ public class Parser {
         };
     }
 
+    /**
+     * Parses an index from commands that require one.
+     *
+     * <p>
+     * Converts user-provided 1-based index into a 0-based index.
+     * </p>
+     *
+     * @param input User input containing the index
+     * @return Zero-based task index
+     * @throws ParseException If the format or index is invalid
+     */
     public static int parseIndex(String input)
             throws ParseException {
         Matcher m = Pattern.compile(INDEX_REGEX).matcher(input.trim());
@@ -59,7 +87,13 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Parses a todo command and extracts its description.
+     *
+     * @param input User input
+     * @return String Todo description
+     * @throws ParseException If the format is invalid
+     */
     public static String parseTodo(String input) throws ParseException {
         Matcher m = Pattern.compile(TODO_REGEX).matcher(input.trim());
 
@@ -71,6 +105,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a deadline command and creates a Deadline task.
+     *
+     * @param input User input
+     * @return Parsed Deadline object
+     * @throws ParseException If the format or date-time is invalid
+     */
     public static Deadline parseDeadline(String input)
             throws ParseException {
         Matcher m = Pattern.compile(DEADLINE_REGEX).matcher(input.trim());
@@ -92,6 +133,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an event command and creates an Event task.
+     *
+     * @param input User input
+     * @return Parsed Event object
+     * @throws ParseException If the format or date-time is invalid
+     */
     public static Event parseEvent(String input)
             throws ParseException {
         Matcher m = Pattern.compile(EVENT_REGEX).matcher(input.trim());
@@ -115,6 +163,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the on-date command and extracts the date.
+     *
+     * @param input User input
+     * @return Parsed LocalDate
+     * @throws ParseException If the date format is invalid
+     */
     public static LocalDate parseOnCommand(String input)
             throws ParseException {
         Matcher m = Pattern.compile(ON_REGEX).matcher(input.trim());
