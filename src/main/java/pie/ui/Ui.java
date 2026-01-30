@@ -1,11 +1,11 @@
 package pie.ui;
 
-import pie.BotMessage;
-import pie.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import pie.BotMessage;
+import pie.task.Task;
 
 /**
  * Handles all user interface interactions for the Pie application.
@@ -49,10 +49,8 @@ public class Ui {
      * @param size The total number of tasks after addition
      */
     public void printTaskAdded(Task task, int size) {
-        System.out.println(LINE +
-                "Got it. I've added this task:\n  " + task +
-                "\nNow you have " + size + " tasks in the list.\n" +
-                LINE);
+        System.out.println(LINE + "Got it. I've added this task:\n" + task
+                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
     }
 
     /**
@@ -62,10 +60,8 @@ public class Ui {
      * @param size The total number of tasks after deletion
      */
     public void printTaskDeleted(Task task, int size) {
-        System.out.println(LINE +
-                "Noted. I've removed this task:\n  " + task +
-                "\nNow you have " + size + " tasks in the list.\n" +
-                LINE);
+        System.out.println(LINE + "Noted. I've removed this task:\n" + task
+                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
     }
 
     /**
@@ -74,9 +70,8 @@ public class Ui {
      * @param task The task that was marked as done
      */
     public void printTaskMarked(Task task) {
-        System.out.println(LINE +
-                "Nice! I've marked this task as done:\n  " + task +
-                "\n" + LINE);
+        System.out.println(LINE + "Nice! I've marked this task as done:\n"
+                + task + "\n" + LINE);
     }
 
     /**
@@ -85,9 +80,8 @@ public class Ui {
      * @param task The task that was marked as not done
      */
     public void printTaskUnmarked(Task task) {
-        System.out.println(LINE +
-                "OK, I've marked this task as not done yet:\n  " + task +
-                "\n" + LINE);
+        System.out.println(LINE + "OK, I've marked this task as not done yet:\n"
+                + task + "\n" + LINE);
     }
 
     /**

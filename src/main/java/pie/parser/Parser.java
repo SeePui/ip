@@ -1,17 +1,26 @@
 package pie.parser;
 
-import pie.BotMessage;
-import pie.command.*;
-import pie.exception.ParseException;
-import pie.task.Deadline;
-import pie.task.Event;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import pie.BotMessage;
+import pie.command.AddDeadlineCommand;
+import pie.command.AddEventCommand;
+import pie.command.AddTodoCommand;
+import pie.command.Command;
+import pie.command.DeleteCommand;
+import pie.command.ExitCommand;
+import pie.command.ListCommand;
+import pie.command.MarkCommand;
+import pie.command.OnCommand;
+import pie.command.UnmarkCommand;
+import pie.exception.ParseException;
+import pie.task.Deadline;
+import pie.task.Event;
 
 /**
  * Parses user input into executable commands and task objects.
@@ -37,8 +46,7 @@ public class Parser {
      * @return A Command object representing the user instruction
      * @throws ParseException If the command is empty, invalid, or unsupported
      */
-    public static Command parseCommand(String input)
-            throws ParseException {
+    public static Command parseCommand(String input) throws ParseException {
         if (input == null || input.trim().isEmpty()) {
             throw new ParseException(BotMessage.ERROR_EMPTY_COMMAND.get());
         }
@@ -47,16 +55,16 @@ public class Parser {
         String commandType = parts[0].toLowerCase();
 
         return switch (commandType) {
-            case "bye" -> new ExitCommand();
-            case "list" -> new ListCommand();
-            case "mark" -> new MarkCommand(parseIndex(input));
-            case "unmark" -> new UnmarkCommand(parseIndex(input));
-            case "delete" -> new DeleteCommand(parseIndex(input));
-            case "todo" -> new AddTodoCommand(parseTodo(input));
-            case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
-            case "event" -> new AddEventCommand(parseEvent(input));
-            case "on" -> new OnCommand(parseOnCommand(input));
-            default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListCommand();
+        case "mark" -> new MarkCommand(parseIndex(input));
+        case "unmark" -> new UnmarkCommand(parseIndex(input));
+        case "delete" -> new DeleteCommand(parseIndex(input));
+        case "todo" -> new AddTodoCommand(parseTodo(input));
+        case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
+        case "event" -> new AddEventCommand(parseEvent(input));
+        case "on" -> new OnCommand(parseOnCommand(input));
+        default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
     }
 
@@ -71,8 +79,7 @@ public class Parser {
      * @return Zero-based task index
      * @throws ParseException If the format or index is invalid
      */
-    public static int parseIndex(String input)
-            throws ParseException {
+    public static int parseIndex(String input) throws ParseException {
         Matcher m = Pattern.compile(INDEX_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -112,8 +119,7 @@ public class Parser {
      * @return Parsed Deadline object
      * @throws ParseException If the format or date-time is invalid
      */
-    public static Deadline parseDeadline(String input)
-            throws ParseException {
+    public static Deadline parseDeadline(String input) throws ParseException {
         Matcher m = Pattern.compile(DEADLINE_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -140,8 +146,7 @@ public class Parser {
      * @return Parsed Event object
      * @throws ParseException If the format or date-time is invalid
      */
-    public static Event parseEvent(String input)
-            throws ParseException {
+    public static Event parseEvent(String input) throws ParseException {
         Matcher m = Pattern.compile(EVENT_REGEX).matcher(input.trim());
 
         if (!m.matches()) {
@@ -170,8 +175,7 @@ public class Parser {
      * @return Parsed LocalDate
      * @throws ParseException If the date format is invalid
      */
-    public static LocalDate parseOnCommand(String input)
-            throws ParseException {
+    public static LocalDate parseOnCommand(String input) throws ParseException {
         Matcher m = Pattern.compile(ON_REGEX).matcher(input.trim());
         if (!m.matches()) {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()

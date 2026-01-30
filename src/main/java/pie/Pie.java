@@ -1,5 +1,7 @@
 package pie;
 
+import java.util.Scanner;
+
 import pie.command.Command;
 import pie.exception.ParseException;
 import pie.exception.StorageException;
@@ -7,8 +9,6 @@ import pie.parser.Parser;
 import pie.storage.Storage;
 import pie.task.TaskList;
 import pie.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * Represents the main class for the Pie application.
@@ -68,7 +68,8 @@ public class Pie {
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
 
-            } catch (ParseException | NumberFormatException | StorageException | IndexOutOfBoundsException e) {
+            } catch (ParseException | NumberFormatException
+                     | StorageException | IndexOutOfBoundsException e) {
                 ui.printError(e.getMessage());
             } catch (Exception e) {
                 ui.printError(BotMessage.ERROR_UNKNOWN.get());
