@@ -5,6 +5,7 @@ import pie.BotMessage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     protected List<Task> tasks;
@@ -80,5 +81,19 @@ public class TaskList {
         }
 
         return tasks.remove(index);
+    }
+
+    /**
+     * Returns a list of tasks whose descriptions contain the given keyword.
+     * Case-insensitive.
+     *
+     * @param keyword The keyword to search for.
+     * @return List of tasks containing the keyword.
+     */
+    public List<Task> findTasks(String keyword) {
+        String lowerCaseKeyword = keyword.toLowerCase();
+        return tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(lowerCaseKeyword))
+                .collect(Collectors.toList());
     }
 }
