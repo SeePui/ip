@@ -38,6 +38,7 @@ public class Parser {
     private static final String DEADLINE_REGEX = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
     private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
+    private static final String FIND_REGEX = "^find\\s+(.*)$";
 
     /**
      * Parses the user input and returns the corresponding Command.
@@ -187,6 +188,24 @@ public class Parser {
             return LocalDate.parse(dateStr);
         } catch (DateTimeParseException e) {
             throw new ParseException(BotMessage.ERROR_INVALID_ON_DATE_FORMAT.get());
+        }
+    }
+
+    /**
+     * Parses the find command and extracts the word to find.
+     *
+     * @param input User input
+     * @return keyword to find
+     * @throws ParseException If the find format is invalid
+     */
+    public static String parseFind(String input) throws ParseException {
+        Matcher m = Pattern.compile(FIND_REGEX).matcher(input.trim());
+
+        if (m.matches()) {
+            return m.group(1);
+        } else {
+            throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
+                    + "Use: find <keyword>\n");
         }
     }
 }

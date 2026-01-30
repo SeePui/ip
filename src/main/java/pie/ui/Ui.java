@@ -129,4 +129,25 @@ public class Ui {
         }
         System.out.println(LINE);
     }
+
+    /**
+     * Prints a list of tasks that match a search keyword.
+     * If the list is empty, prints an appropriate message.
+     *
+     * @param keyword The keyword used for searching.
+     * @param tasks   The list of tasks that matched the keyword.
+     */
+    public void printMatchingTasks(String keyword, List<Task> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println(LINE + "No tasks match the keyword: \""
+                    + keyword + "\"\n" + LINE);
+            return;
+        }
+
+        System.out.println(LINE + "Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i));
+        }
+        System.out.println(LINE);
+    }
 }
