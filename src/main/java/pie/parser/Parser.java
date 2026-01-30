@@ -14,6 +14,7 @@ import pie.command.AddTodoCommand;
 import pie.command.Command;
 import pie.command.DeleteCommand;
 import pie.command.ExitCommand;
+import pie.command.FindCommand;
 import pie.command.ListCommand;
 import pie.command.MarkCommand;
 import pie.command.OnCommand;
@@ -65,6 +66,7 @@ public class Parser {
         case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
         case "event" -> new AddEventCommand(parseEvent(input));
         case "on" -> new OnCommand(parseOnCommand(input));
+        case "find" -> new FindCommand(parseFind(input));
         default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
     }
