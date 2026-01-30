@@ -28,11 +28,6 @@ public class Event extends Task {
         this.to = to;
     }
 
-    /**
-     * Returns a string representation of the event for display.
-     *
-     * @return String in the format "[E][status] description (from: ... to: ...)"
-     */
     @Override
     public String toString() {
         DateTimeFormatter outputFormat =
@@ -43,32 +38,12 @@ public class Event extends Task {
                 + " to: " + to.format(outputFormat) + ")";
     }
 
-    /**
-     * Returns a string representation of the event for saving to storage.
-     *
-     * <p>
-     * Format: "E | isDone | description | from | to"
-     * </p>
-     *
-     * @return Event task as a string suitable for saving
-     */
     @Override
     public String toSaveString() {
         return "E | " + (getIsDone() ? "1" : "0") + " | "
                 + getDescription() + " | " + from + " | " + to;
     }
 
-    /**
-     * Checks whether the event occurs on the specified date.
-     *
-     * <p>
-     * An event is considered to occur on a date if its start date
-     * matches the given date.
-     * </p>
-     *
-     * @param date The date to check
-     * @return true if the event occurs on the given date, false otherwise
-     */
     @Override
     public boolean occursOn(LocalDate date) {
         return from.toLocalDate().equals(date);

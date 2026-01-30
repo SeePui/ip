@@ -13,11 +13,6 @@ public class ExitCommand extends Command {
         ui.printBye();
     }
 
-    /**
-     * Indicates that this command causes the application to exit.
-     *
-     * @return {@code true}, as this is an exit command.
-     */
     @Override
     public boolean isExit() {
         return true;
