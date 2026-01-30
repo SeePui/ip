@@ -1,16 +1,19 @@
 package pie.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
+
 import pie.BotMessage;
 import pie.command.AddTodoCommand;
 import pie.command.Command;
 import pie.command.MarkCommand;
 import pie.exception.ParseException;
 import pie.task.Deadline;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test

@@ -1,17 +1,27 @@
 package pie.parser;
 
-import pie.BotMessage;
-import pie.command.*;
-import pie.exception.ParseException;
-import pie.task.Deadline;
-import pie.task.Event;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import pie.BotMessage;
+import pie.command.AddDeadlineCommand;
+import pie.command.AddEventCommand;
+import pie.command.AddTodoCommand;
+import pie.command.Command;
+import pie.command.DeleteCommand;
+import pie.command.ExitCommand;
+import pie.command.ListCommand;
+import pie.command.MarkCommand;
+import pie.command.OnCommand;
+import pie.command.UnmarkCommand;
+import pie.exception.ParseException;
+import pie.task.Deadline;
+import pie.task.Event;
+
 
 public class Parser {
     private static final String INDEX_REGEX = "^(mark|unmark|delete)\\s+(\\d+)$";
@@ -29,16 +39,16 @@ public class Parser {
         String commandType = parts[0].toLowerCase();
 
         return switch (commandType) {
-            case "bye" -> new ExitCommand();
-            case "list" -> new ListCommand();
-            case "mark" -> new MarkCommand(parseIndex(input));
-            case "unmark" -> new UnmarkCommand(parseIndex(input));
-            case "delete" -> new DeleteCommand(parseIndex(input));
-            case "todo" -> new AddTodoCommand(parseTodo(input));
-            case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
-            case "event" -> new AddEventCommand(parseEvent(input));
-            case "on" -> new OnCommand(parseOnCommand(input));
-            default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListCommand();
+        case "mark" -> new MarkCommand(parseIndex(input));
+        case "unmark" -> new UnmarkCommand(parseIndex(input));
+        case "delete" -> new DeleteCommand(parseIndex(input));
+        case "todo" -> new AddTodoCommand(parseTodo(input));
+        case "deadline" -> new AddDeadlineCommand(parseDeadline(input));
+        case "event" -> new AddEventCommand(parseEvent(input));
+        case "on" -> new OnCommand(parseOnCommand(input));
+        default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
     }
 

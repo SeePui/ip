@@ -1,13 +1,5 @@
 package pie.storage;
 
-import pie.BotMessage;
-import pie.exception.StorageException;
-import pie.task.Deadline;
-import pie.task.Event;
-import pie.task.Task;
-import pie.task.Todo;
-import pie.ui.Ui;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +7,14 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import pie.BotMessage;
+import pie.exception.StorageException;
+import pie.task.Deadline;
+import pie.task.Event;
+import pie.task.Task;
+import pie.task.Todo;
+import pie.ui.Ui;
 
 public class Storage {
     private static final Path FILE_PATH = Paths.get("data", "pie.txt");
@@ -58,18 +58,18 @@ public class Storage {
             boolean isDone = parts[1].equals("1");
 
             Task task = switch (taskType) {
-                case "T" -> new Todo(parts[2]);
-                case "D" -> {
-                    LocalDateTime by = LocalDateTime.parse(parts[3]);
-                    yield new Deadline(parts[2], by);
-                }
-                case "E" -> {
-                    LocalDateTime from = LocalDateTime.parse(parts[3]);
-                    LocalDateTime to = LocalDateTime.parse(parts[4]);
-                    yield new Event(parts[2], from, to);
-                }
-                default -> throw new IllegalArgumentException(
-                        "Skipping unknown task type: " + input + "\n");
+            case "T" -> new Todo(parts[2]);
+            case "D" -> {
+                LocalDateTime by = LocalDateTime.parse(parts[3]);
+                yield new Deadline(parts[2], by);
+            }
+            case "E" -> {
+                LocalDateTime from = LocalDateTime.parse(parts[3]);
+                LocalDateTime to = LocalDateTime.parse(parts[4]);
+                yield new Event(parts[2], from, to);
+            }
+            default -> throw new IllegalArgumentException(
+                    "Skipping unknown task type: " + input + "\n");
             };
 
             if (isDone) {
