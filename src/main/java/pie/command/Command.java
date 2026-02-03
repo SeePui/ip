@@ -3,6 +3,7 @@ package pie.command;
 import pie.exception.StorageException;
 import pie.storage.Storage;
 import pie.task.TaskList;
+import pie.ui.MessageBuilder;
 import pie.ui.Ui;
 
 /**
@@ -14,10 +15,11 @@ import pie.ui.Ui;
  */
 public abstract class Command {
     /**
-     * Execute the command
+     * Executes the command to get the message to display from the
+     * {@link MessageBuilder} and updating the user interface message.
      *
      * @param taskList The task list to operate on.
-     * @param ui       The user interface used to display output to the user.
+     * @param ui       The user interface used to store the message to be displayed.
      * @param storage  The storage used to persist the data.
      * @throws StorageException If an error occurs while saving or loading tasks.
      */

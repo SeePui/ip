@@ -5,6 +5,7 @@ import java.util.List;
 import pie.storage.Storage;
 import pie.task.Task;
 import pie.task.TaskList;
+import pie.ui.MessageBuilder;
 import pie.ui.Ui;
 
 /**
@@ -25,6 +26,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> matchingTasks = taskList.findTasks(keyword);
-        ui.printMatchingTasks(keyword, matchingTasks);
+        String outputMessage = MessageBuilder.matchingTasks(keyword, matchingTasks);
+        ui.setMessage(outputMessage);
     }
 }

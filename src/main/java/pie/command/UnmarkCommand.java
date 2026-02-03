@@ -4,6 +4,7 @@ import pie.exception.StorageException;
 import pie.storage.Storage;
 import pie.task.Task;
 import pie.task.TaskList;
+import pie.ui.MessageBuilder;
 import pie.ui.Ui;
 
 /**
@@ -24,7 +25,8 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException {
         Task task = taskList.unmarkTask(index);
-        ui.printTaskUnmarked(task);
+        String outputMessage = MessageBuilder.taskUnmarked(task);
+        ui.setMessage(outputMessage);
         storage.save(taskList.getAllTasks());
     }
 }
