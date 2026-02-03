@@ -10,7 +10,7 @@ public class Ui {
     /**
      * Returns the latest message stored in the UI.
      *
-     * @return The last message set via {@link #setMessage(String)}
+     * @return The last message set via {@link #setMessage(String)}.
      */
     public String getMessage() {
         return message;
@@ -25,7 +25,7 @@ public class Ui {
      * to handle the actual display.
      * </p>
      *
-     * @param message The message to store
+     * @param message The message to store.
      */
     public void setMessage(String message) {
         this.message = message;

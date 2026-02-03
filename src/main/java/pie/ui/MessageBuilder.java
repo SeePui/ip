@@ -23,7 +23,7 @@ public class MessageBuilder {
     /**
      * Builds a welcome message for the application start.
      *
-     * @return Formatted welcome message
+     * @return Formatted welcome message.
      */
     public static String welcome() {
         return BotMessage.START.get();
@@ -32,7 +32,7 @@ public class MessageBuilder {
     /**
      * Builds a goodbye message for the application exit.
      *
-     * @return Formatted goodbye message
+     * @return Formatted goodbye message.
      */
     public static String bye() {
         return BotMessage.BYE.get();
@@ -41,8 +41,8 @@ public class MessageBuilder {
     /**
      * Builds a formatted error message.
      *
-     * @param message Error message
-     * @return Formatted error message
+     * @param message Error message.
+     * @return Formatted error message.
      */
     public static String error(String message) {
         return message;
@@ -51,9 +51,9 @@ public class MessageBuilder {
     /**
      * Builds a message confirming a task has been added.
      *
-     * @param task Task that was added
-     * @param size Total number of tasks after addition
-     * @return Formatted task-added message
+     * @param task Task that was added.
+     * @param size Total number of tasks after addition.
+     * @return Formatted task-added message.
      */
     public static String taskAdded(Task task, int size) {
         return "Got it. I've added this task:\n" + task
@@ -63,9 +63,9 @@ public class MessageBuilder {
     /**
      * Builds a message confirming a task has been deleted.
      *
-     * @param task Task that was deleted
-     * @param size Total number of tasks after deletion
-     * @return Formatted task-deleted message
+     * @param task Task that was deleted.
+     * @param size Total number of tasks after deletion.
+     * @return Formatted task-deleted message.
      */
     public static String taskDeleted(Task task, int size) {
         return "Noted. I've removed this task:\n" + task
@@ -75,8 +75,8 @@ public class MessageBuilder {
     /**
      * Builds a message confirming a task has been marked as done.
      *
-     * @param task Task that was marked as done
-     * @return Formatted task-marked message
+     * @param task Task that was marked as done.
+     * @return Formatted task-marked message.
      */
     public static String taskMarked(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
@@ -85,8 +85,8 @@ public class MessageBuilder {
     /**
      * Builds a message confirming a task has been unmarked.
      *
-     * @param task Task that was marked as not done
-     * @return Formatted task-unmarked message
+     * @param task Task that was marked as not done.
+     * @return Formatted task-unmarked message.
      */
     public static String taskUnmarked(Task task) {
         return "OK, I've marked this task as not done yet:\n" + task;
@@ -97,8 +97,8 @@ public class MessageBuilder {
      *
      * <p>If the task list is empty, returns a message indicating so.</p>
      *
-     * @param tasks List of tasks
-     * @return Formatted task list message
+     * @param tasks List of tasks.
+     * @return Formatted task list message.
      */
     public static String taskList(List<Task> tasks) {
         if (tasks.isEmpty()) {
@@ -116,9 +116,9 @@ public class MessageBuilder {
      *
      * <p>If no tasks occur on the given date, returns a message indicating so.</p>
      *
-     * @param date  The date to filter tasks
-     * @param tasks List of tasks on that date
-     * @return Formatted tasks-on-date message
+     * @param date  The date to filter tasks.
+     * @param tasks List of tasks on that date.
+     * @return Formatted tasks-on-date message.
      */
     public static String tasksOnDate(LocalDate date, List<Task> tasks) {
         if (tasks.isEmpty()) {
@@ -138,9 +138,9 @@ public class MessageBuilder {
      *
      * <p>If no tasks match, returns a message indicating so.</p>
      *
-     * @param keyword The search keyword
-     * @param tasks   List of matching tasks
-     * @return Formatted matching-tasks message
+     * @param keyword The search keyword.
+     * @param tasks   List of matching tasks.
+     * @return Formatted matching-tasks message.
      */
     public static String matchingTasks(String keyword, List<Task> tasks) {
         if (tasks.isEmpty()) {

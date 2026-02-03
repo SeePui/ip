@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Injects the Pie instance
+     * Injects the Pie instance.
      */
     public void setPie(Pie p) {
         pie = p;

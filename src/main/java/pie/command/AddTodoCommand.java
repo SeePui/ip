@@ -17,7 +17,7 @@ public class AddTodoCommand extends Command {
     /**
      * Instantiates a new {@code AddTodoCommand} with the specified todo task.
      *
-     * @param description Todo description
+     * @param description Todo description.
      */
     public AddTodoCommand(String description) {
         this.description = description;

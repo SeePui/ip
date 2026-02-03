@@ -37,8 +37,8 @@ public class Storage {
      * to the user.
      * </p>
      *
-     * @return A list of tasks loaded from storage
-     * @throws StorageException If an I/O error occurs while reading the file
+     * @return A list of tasks loaded from storage.
+     * @throws StorageException If an I/O error occurs while reading the file.
      */
     public List<Task> load() throws StorageException {
         List<Task> tasks = new ArrayList<>();
@@ -82,9 +82,9 @@ public class Storage {
      * </ul>
      * </p>
      *
-     * @param input A single line from the storage file
-     * @return Parsed Task object
-     * @throws StorageException If the line is invalid or corrupted
+     * @param input A single line from the storage file.
+     * @return Parsed Task object.
+     * @throws StorageException If the line is invalid or corrupted.
      */
     public Task parseTask(String input) throws StorageException {
         try {
@@ -129,8 +129,8 @@ public class Storage {
      * {@link Task#toSaveString()} before being written to disk.
      * </p>
      *
-     * @param tasks List of tasks to save
-     * @throws StorageException If an I/O error occurs while writing the file
+     * @param tasks List of tasks to save.
+     * @throws StorageException If an I/O error occurs while writing the file.
      */
     public void save(List<Task> tasks) throws StorageException {
         try {

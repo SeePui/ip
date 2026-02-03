@@ -18,7 +18,7 @@ public class Task {
     /**
      * Instantiates a new Task.
      *
-     * @param description textual description of the task
+     * @param description textual description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -57,7 +57,7 @@ public class Task {
      * Format: "1 | description" if done, "0 | description" if not done.
      * </p>
      *
-     * @return Task as a string suitable for saving
+     * @return Task as a string suitable for saving.
      */
     public String toSaveString() {
         return (isDone ? "1" : "0") + " | " + description;
@@ -66,8 +66,8 @@ public class Task {
     /**
      * Determines whether the task occurs on the given date.
      *
-     * @param date Date to check
-     * @return true if the task occurs on the date, false otherwise
+     * @param date Date to check.
+     * @return true if the task occurs on the date, false otherwise.
      */
     public boolean occursOn(LocalDate date) {
         return false;

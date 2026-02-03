@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Deadline task.
  *
  * <p>
- * An Deadline has a description and end date-time.
+ * A Deadline has a description and end date-time.
  * </p>
  */
 public class Deadline extends Task {
@@ -17,8 +17,8 @@ public class Deadline extends Task {
     /**
      * Instantiates a new Deadline.
      *
-     * @param description Description of the deadline
-     * @param by          End date and time of the deadline
+     * @param description Description of the deadline.
+     * @param by          End date and time of the deadline.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);

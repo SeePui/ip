@@ -42,7 +42,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Clips the ImageView into a circle and adds a drop shadow.
+     * Clips the ImageView into a circle.
      *
      * @param imageView The ImageView to make circular.
      */

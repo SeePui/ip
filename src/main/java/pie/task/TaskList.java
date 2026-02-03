@@ -29,7 +29,7 @@ public class TaskList {
     /**
      * Instantiates a new Task list.
      *
-     * @param tasks A list of tasks to initialize the TaskList with
+     * @param tasks A list of tasks to initialize the TaskList with.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -38,7 +38,7 @@ public class TaskList {
     /**
      * Checks whether the task list is empty.
      *
-     * @return true if the task list contains no tasks, false otherwise
+     * @return true if the task list contains no tasks, false otherwise.
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
@@ -47,7 +47,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in the task list.
      *
-     * @return Total number of tasks
+     * @return Total number of tasks.
      */
     public int getSize() {
         return tasks.size();
@@ -61,9 +61,9 @@ public class TaskList {
      * is invalid.
      * </p>
      *
-     * @param index Index of the task to retrieve
-     * @return The task at the specified index
-     * @throws IndexOutOfBoundsException if the index is invalid
+     * @param index Index of the task to retrieve.
+     * @return The task at the specified index.
+     * @throws IndexOutOfBoundsException if the index is invalid.
      */
     private Task getTask(int index) {
         if (index < 0 || index >= tasks.size()) {
@@ -75,8 +75,8 @@ public class TaskList {
     /**
      * Returns a list of tasks that occur on the specified date.
      *
-     * @param date The date to check against
-     * @return A list of tasks occurring on the given date
+     * @param date The date to check against.
+     * @return A list of tasks occurring on the given date.
      */
     public List<Task> getTasksOnDate(LocalDate date) {
         List<Task> result = new ArrayList<>();
@@ -91,7 +91,7 @@ public class TaskList {
     /**
      * Returns all tasks in the task list.
      *
-     * @return List of all tasks
+     * @return List of all tasks.
      */
     public List<Task> getAllTasks() {
         return tasks;
@@ -100,8 +100,8 @@ public class TaskList {
     /**
      * Marks the task at the specified index as done.
      *
-     * @param index Index of the task to mark
-     * @return The updated task
+     * @param index Index of the task to mark.
+     * @return The updated task.
      */
     public Task markTask(int index) {
         Task task = getTask(index);
@@ -112,8 +112,8 @@ public class TaskList {
     /**
      * Marks the task at the specified index as not done.
      *
-     * @param index Index of the task to unmark
-     * @return The updated task
+     * @param index Index of the task to unmark.
+     * @return The updated task.
      */
     public Task unmarkTask(int index) {
         Task task = getTask(index);
@@ -124,8 +124,8 @@ public class TaskList {
     /**
      * Adds a new Todo task to the task list.
      *
-     * @param description Description of the todo task
-     * @return The added Todo task
+     * @param description Description of the todo task.
+     * @return The added Todo task.
      */
     public Task addTodo(String description) {
         Task todo = new Todo(description);
@@ -136,8 +136,8 @@ public class TaskList {
     /**
      * Adds a Deadline task to the task list.
      *
-     * @param deadline The deadline task to add
-     * @return The added Deadline task
+     * @param deadline The deadline task to add.
+     * @return The added Deadline task.
      */
     public Task addDeadline(Deadline deadline) {
         tasks.add(deadline);
@@ -147,8 +147,8 @@ public class TaskList {
     /**
      * Adds an Event task to the task list.
      *
-     * @param event The event task to add
-     * @return The added Event task
+     * @param event The event task to add.
+     * @return The added Event task.
      */
     public Task addEvent(Event event) {
         tasks.add(event);
@@ -158,9 +158,9 @@ public class TaskList {
     /**
      * Deletes the task at the specified index.
      *
-     * @param index Index of the task to delete
-     * @return The deleted task
-     * @throws IndexOutOfBoundsException if the index is invalid
+     * @param index Index of the task to delete.
+     * @return The deleted task.
+     * @throws IndexOutOfBoundsException if the index is invalid.
      */
     public Task deleteTask(int index) {
         if (index < 0 || index >= tasks.size()) {
