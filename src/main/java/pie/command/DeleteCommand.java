@@ -4,6 +4,7 @@ import pie.exception.StorageException;
 import pie.storage.Storage;
 import pie.task.Task;
 import pie.task.TaskList;
+import pie.ui.MessageBuilder;
 import pie.ui.Ui;
 
 /**
@@ -24,7 +25,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException {
         Task task = taskList.deleteTask(index);
-        ui.printTaskDeleted(task, taskList.getSize());
+        String outputMessage = MessageBuilder.taskDeleted(task, taskList.getSize());
+        ui.setMessage(outputMessage);
         storage.save(taskList.getAllTasks());
     }
 }

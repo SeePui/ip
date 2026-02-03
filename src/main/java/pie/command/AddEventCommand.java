@@ -5,6 +5,7 @@ import pie.storage.Storage;
 import pie.task.Event;
 import pie.task.Task;
 import pie.task.TaskList;
+import pie.ui.MessageBuilder;
 import pie.ui.Ui;
 
 /**
@@ -25,7 +26,8 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException {
         Task event = taskList.addEvent(this.event);
-        ui.printTaskAdded(event, taskList.getSize());
+        String outputMessage = MessageBuilder.taskAdded(event, taskList.getSize());
+        ui.setMessage(outputMessage);
         storage.save(taskList.getAllTasks());
     }
 }

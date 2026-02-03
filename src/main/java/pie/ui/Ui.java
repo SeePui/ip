@@ -1,153 +1,33 @@
 package pie.ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import pie.BotMessage;
-import pie.task.Task;
-
 /**
- * Handles all user interface interactions for the Pie application.
+ * Represents the user interface for the Pie application.
  *
- * <p>
- * This class is responsible for displaying messages, task lists, and
- * feedback to the user.
- * </p>
  */
 public class Ui {
-    private static final String LINE =
-            "________________________________________________________\n";
+    private String message;
 
     /**
-     * Prints the welcome message when the application starts.
-     */
-    public void printWelcome() {
-        System.out.println(LINE + BotMessage.START.get() + LINE);
-    }
-
-    /**
-     * Prints the goodbye message when the application exits.
-     */
-    public void printBye() {
-        System.out.println(LINE + BotMessage.BYE.get() + LINE);
-    }
-
-    /**
-     * Prints an error message.
+     * Returns the latest message stored in the UI.
      *
-     * @param message Error message to display
+     * @return The last message set via {@link #setMessage(String)}
      */
-    public void printError(String message) {
-        System.out.println(LINE + message + LINE);
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Prints a confirmation message when a task is added.
-     *
-     * @param task The task that was added
-     * @param size The total number of tasks after addition
-     */
-    public void printTaskAdded(Task task, int size) {
-        System.out.println(LINE + "Got it. I've added this task:\n" + task
-                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
-    }
-
-    /**
-     * Prints a confirmation message when a task is deleted.
-     *
-     * @param task The task that was deleted
-     * @param size The total number of tasks after deletion
-     */
-    public void printTaskDeleted(Task task, int size) {
-        System.out.println(LINE + "Noted. I've removed this task:\n" + task
-                + "\nNow you have " + size + " tasks in the list.\n" + LINE);
-    }
-
-    /**
-     * Prints a confirmation message when a task is marked as done.
-     *
-     * @param task The task that was marked as done
-     */
-    public void printTaskMarked(Task task) {
-        System.out.println(LINE + "Nice! I've marked this task as done:\n"
-                + task + "\n" + LINE);
-    }
-
-    /**
-     * Prints a confirmation message when a task is unmarked.
-     *
-     * @param task The task that was marked as not done
-     */
-    public void printTaskUnmarked(Task task) {
-        System.out.println(LINE + "OK, I've marked this task as not done yet:\n"
-                + task + "\n" + LINE);
-    }
-
-    /**
-     * Prints all tasks in the task list.
+     * Sets a message to be displayed to the user.
      *
      * <p>
-     * If the task list is empty, an empty list message is shown instead.
+     * Commands or other components can call this method to update the message
+     * instead of printing it directly. This allows the UI layer (such as JavaFX)
+     * to handle the actual display.
      * </p>
      *
-     * @param tasks List of tasks to display
+     * @param message The message to store
      */
-    public void printTaskList(List<Task> tasks) {
-        if (tasks.isEmpty()) {
-            System.out.println(LINE + BotMessage.EMPTY_LIST.get() + LINE);
-            return;
-        }
-
-        System.out.println(LINE + "Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(LINE);
-    }
-
-    /**
-     * Prints tasks that occur on a specific date.
-     *
-     * <p>
-     * If no tasks occur on the given date, an empty list message is shown.
-     * </p>
-     *
-     * @param date  The date to filter tasks by
-     * @param tasks List of tasks occurring on the given date
-     */
-    public void printTasksOnDate(LocalDate date, List<Task> tasks) {
-        if (tasks.isEmpty()) {
-            System.out.println(LINE + BotMessage.EMPTY_LIST_ON_DATE.get() + LINE);
-            return;
-        }
-
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        System.out.println(LINE + "Here are the tasks on " + date.format(fmt) + ":");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(LINE);
-    }
-
-    /**
-     * Prints a list of tasks that match a search keyword.
-     * If the list is empty, prints an appropriate message.
-     *
-     * @param keyword The keyword used for searching.
-     * @param tasks   The list of tasks that matched the keyword.
-     */
-    public void printMatchingTasks(String keyword, List<Task> tasks) {
-        if (tasks.isEmpty()) {
-            System.out.println(LINE + "No tasks match the keyword: \""
-                    + keyword + "\"\n" + LINE);
-            return;
-        }
-
-        System.out.println(LINE + "Here are the matching tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(LINE);
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

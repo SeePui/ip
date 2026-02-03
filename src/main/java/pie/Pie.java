@@ -1,7 +1,5 @@
 package pie;
 
-import java.util.Scanner;
-
 import pie.command.Command;
 import pie.exception.ParseException;
 import pie.exception.StorageException;
@@ -41,48 +39,41 @@ public class Pie {
         try {
             loadedTaskList = new TaskList(storage.load());
         } catch (StorageException e) {
-            ui.printError(e.getMessage());
+            ui.setMessage(e.getMessage());
             loadedTaskList = new TaskList();
         }
         taskList = loadedTaskList;
     }
 
     /**
-     * Starts the main loop of the application.
+     * Processes a single user input by parsing and executing the corresponding command.
      *
      * <p>
-     * Reads user inputs, parses them, executes them,
-     * and prints the results. Carry on until an exit command is given.
+     * Reads user inputs, parses them and executes them.
      * Exceptions are caught and handled by printing error messages.
      * </p>
+     *
+     * @param input The user input to process.
      */
-    public void run() {
-        ui.printWelcome();
-        boolean isExit = false;
-        Scanner scanner = new Scanner(System.in);
+    public void run(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            command.execute(taskList, ui, storage);
 
-        while (!isExit) {
-            try {
-                String input = scanner.nextLine();
-                Command command = Parser.parseCommand(input);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-
-            } catch (ParseException | NumberFormatException
-                     | StorageException | IndexOutOfBoundsException e) {
-                ui.printError(e.getMessage());
-            } catch (Exception e) {
-                ui.printError(BotMessage.ERROR_UNKNOWN.get());
-            }
+        } catch (ParseException | NumberFormatException
+                 | StorageException | IndexOutOfBoundsException e) {
+            ui.setMessage(e.getMessage());
+        } catch (Exception e) {
+            ui.setMessage(BotMessage.ERROR_UNKNOWN.get());
         }
     }
 
     /**
-     * Represents the starting point of Pie application.
+     * Returns the {@link Ui} instance used by this application.
      *
-     * @param args Command-line arguments (not used)
+     * @return The user interface instance.
      */
-    public static void main(String[] args) {
-        new Pie().run();
+    public Ui getUi() {
+        return ui;
     }
 }

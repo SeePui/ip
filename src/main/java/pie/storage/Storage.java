@@ -60,10 +60,9 @@ public class Storage {
                     tasks.add(parseTask(line));
                 } catch (StorageException e) {
                     Ui ui = new Ui();
-                    ui.printError(e.getMessage());
+                    ui.setMessage(e.getMessage());
                 }
             }
-
         } catch (IOException e) {
             throw new StorageException(BotMessage.ERROR_LOAD_FAILED.get());
         }
