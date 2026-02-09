@@ -20,11 +20,17 @@ public class FindCommand extends Command {
      * @param keyword The keyword to search for in task descriptions.
      */
     public FindCommand(String keyword) {
+        assert keyword != null : "Find keyword must not be null";
+        assert !keyword.isBlank() : "Find keyword must not be blank";
+
         this.keyword = keyword;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "TaskList must not be null when executing command";
+        assert ui != null : "Ui must not be null when executing command";
+
         List<Task> matchingTasks = taskList.findTasks(keyword);
         String outputMessage = MessageBuilder.matchingTasks(keyword, matchingTasks);
         ui.setMessage(outputMessage);

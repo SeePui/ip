@@ -24,6 +24,10 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException {
+        assert taskList != null : "TaskList must not be null when executing command";
+        assert ui != null : "Ui must not be null when executing command";
+        assert storage != null : "Storage must not be null when executing command";
+
         Task task = taskList.markTask(index);
         String outputMessage = MessageBuilder.taskMarked(task);
         ui.setMessage(outputMessage);

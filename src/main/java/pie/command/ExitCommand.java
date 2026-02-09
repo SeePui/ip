@@ -11,6 +11,8 @@ import pie.ui.Ui;
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert ui != null : "Ui must not be null when executing command";
+
         ui.setMessage(MessageBuilder.bye());
     }
 

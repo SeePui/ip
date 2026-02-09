@@ -20,11 +20,17 @@ public class AddEventCommand extends Command {
      * @param event The {@link Event} task to be added.
      */
     public AddEventCommand(Event event) {
+        assert event != null : "Event must not be null";
+
         this.event = event;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException {
+        assert taskList != null : "TaskList must not be null when executing command";
+        assert ui != null : "Ui must not be null when executing command";
+        assert storage != null : "Storage must not be null when executing command";
+
         Task event = taskList.addEvent(this.event);
         String outputMessage = MessageBuilder.taskAdded(event, taskList.getSize());
         ui.setMessage(outputMessage);
