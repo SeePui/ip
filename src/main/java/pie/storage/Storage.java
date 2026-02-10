@@ -26,48 +26,56 @@ import pie.ui.Ui;
  * </p>
  */
 public class Storage {
+
     private static final Path FILE_PATH = Paths.get("data", "pie.txt");
 
+    // Indices for parsing stored task format
+    private static final int TYPE_INDEX = 0;
+    private static final int DONE_INDEX = 1;
+    private static final int DESCRIPTION_INDEX = 2;
+    private static final int DEADLINE_INDEX = 3;
+    private static final int EVENT_FROM_INDEX = 3;
+    private static final int EVENT_TO_INDEX = 4;
+
     /**
-     * Loads the tasks from the storage file.
-     *
-     * <p>
-     * If the storage directory or file does not exist, they will be created.
-     * Corrupted or invalid task lines are skipped with an error message shown
-     * to the user.
-     * </p>
+     * Loads tasks from the storage file.
      *
      * @return A list of tasks loaded from storage.
-     * @throws StorageException If an I/O error occurs while reading the file.
+     * @throws StorageException If an I/O error occurs.
      */
     public List<Task> load() throws StorageException {
         List<Task> tasks = new ArrayList<>();
 
         try {
-            Path directory = FILE_PATH.getParent();
-            if (directory != null && !Files.exists(directory)) {
-                Files.createDirectories(directory);
-            }
-
-            if (!Files.exists(FILE_PATH)) {
-                Files.createFile(FILE_PATH);
-                return tasks;
-            }
-
-            List<String> lines = Files.readAllLines(FILE_PATH);
-            for (String line : lines) {
+            ensureStorageExists();
+            for (String line : Files.readAllLines(FILE_PATH)) {
                 try {
                     tasks.add(parseTask(line));
-                } catch (StorageException e) {
-                    Ui ui = new Ui();
-                    ui.setMessage(e.getMessage());
+                } catch (StorageException se) {
+                    Ui ui;
+                    ui = new Ui();
+                    ui.setMessage(se.getMessage());
                 }
             }
+            return tasks;
         } catch (IOException e) {
             throw new StorageException(BotMessage.ERROR_LOAD_FAILED.get());
         }
+    }
 
-        return tasks;
+    /**
+     * Ensures the storage directory and file exist.
+     *
+     * @throws IOException If directory or file creation fails.
+     */
+    private void ensureStorageExists() throws IOException {
+        Path directory = FILE_PATH.getParent();
+        if (directory != null && !Files.exists(directory)) {
+            Files.createDirectories(directory);
+        }
+        if (!Files.exists(FILE_PATH)) {
+            Files.createFile(FILE_PATH);
+        }
     }
 
     /**
@@ -90,22 +98,21 @@ public class Storage {
         try {
             String[] parts = input.split("\\s*\\|\\s*");
 
-            String taskType = parts[0];
-            boolean isDone = parts[1].equals("1");
+            String taskType = parts[TYPE_INDEX];
+            boolean isDone = parts[DONE_INDEX].equals("1");
 
             Task task = switch (taskType) {
-            case "T" -> new Todo(parts[2]);
-            case "D" -> {
-                LocalDateTime by = LocalDateTime.parse(parts[3]);
-                yield new Deadline(parts[2], by);
-            }
-            case "E" -> {
-                LocalDateTime from = LocalDateTime.parse(parts[3]);
-                LocalDateTime to = LocalDateTime.parse(parts[4]);
-                yield new Event(parts[2], from, to);
-            }
-            default -> throw new IllegalArgumentException(
-                    "Skipping unknown task type: " + input + "\n");
+            case "T" -> new Todo(parts[DESCRIPTION_INDEX]);
+            case "D" -> new Deadline(
+                    parts[DESCRIPTION_INDEX],
+                    LocalDateTime.parse(parts[DEADLINE_INDEX])
+            );
+            case "E" -> new Event(
+                    parts[DESCRIPTION_INDEX],
+                    LocalDateTime.parse(parts[EVENT_FROM_INDEX]),
+                    LocalDateTime.parse(parts[EVENT_TO_INDEX])
+            );
+            default -> throw new StorageException("Skipping unknown task type: " + input);
             };
 
             if (isDone) {
@@ -113,11 +120,8 @@ public class Storage {
             }
 
             return task;
-
-        } catch (IllegalArgumentException iea) {
-            throw new StorageException(iea.getMessage());
         } catch (Exception e) {
-            throw new StorageException("Skipping corrupted line: " + input + "\n");
+            throw new StorageException("Skipping corrupted line: " + input);
         }
     }
 
