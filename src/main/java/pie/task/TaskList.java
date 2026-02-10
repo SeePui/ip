@@ -36,15 +36,6 @@ public class TaskList {
     }
 
     /**
-     * Checks whether the task list is empty.
-     *
-     * @return true if the task list contains no tasks, false otherwise.
-     */
-    public boolean isEmpty() {
-        return tasks.isEmpty();
-    }
-
-    /**
      * Returns the number of tasks in the task list.
      *
      * @return Total number of tasks.
