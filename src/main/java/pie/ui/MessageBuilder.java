@@ -16,19 +16,6 @@ import pie.task.Task;
  * </p>
  */
 public class MessageBuilder {
-
-    private static final String LINE =
-            "________________________________________________________\n";
-
-    /**
-     * Builds a welcome message for the application start.
-     *
-     * @return Formatted welcome message.
-     */
-    public static String welcome() {
-        return BotMessage.START.get();
-    }
-
     /**
      * Builds a goodbye message for the application exit.
      *
@@ -36,16 +23,6 @@ public class MessageBuilder {
      */
     public static String bye() {
         return BotMessage.BYE.get();
-    }
-
-    /**
-     * Builds a formatted error message.
-     *
-     * @param message Error message.
-     * @return Formatted error message.
-     */
-    public static String error(String message) {
-        return message;
     }
 
     /**

@@ -24,14 +24,4 @@ public abstract class Command {
      * @throws StorageException If an error occurs while saving or loading tasks.
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws StorageException;
-
-    /**
-     * Indicates whether this command is an exit command.
-     *
-     * @return {@code true} if this command signals the application to exit;
-     *     {@code false} otherwise.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

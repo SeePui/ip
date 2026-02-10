@@ -15,9 +15,4 @@ public class ExitCommand extends Command {
 
         ui.setMessage(MessageBuilder.bye());
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
