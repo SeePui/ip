@@ -21,11 +21,16 @@ public class OnCommand extends Command {
      * @param date The date to filter tasks by.
      */
     public OnCommand(LocalDate date) {
+        assert date != null : "Date must not be null";
+
         this.date = date;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "TaskList must not be null when executing command";
+        assert ui != null : "Ui must not be null when executing command";
+
         List<Task> result = taskList.getTasksOnDate(date);
         String outputMessage = MessageBuilder.tasksOnDate(date, result);
         ui.setMessage(outputMessage);
