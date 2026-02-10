@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
         assert taskList != null : "TaskList must not be null when executing command";
         assert ui != null : "Ui must not be null when executing command";
         assert storage != null : "Storage must not be null when executing command";
-        
+
         Task task = taskList.deleteTask(index);
         String outputMessage = MessageBuilder.taskDeleted(task, taskList.getSize());
         ui.setMessage(outputMessage);
