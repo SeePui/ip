@@ -18,6 +18,7 @@ import pie.command.FindCommand;
 import pie.command.ListCommand;
 import pie.command.MarkCommand;
 import pie.command.OnCommand;
+import pie.command.SortCommand;
 import pie.command.UnmarkCommand;
 import pie.exception.ParseException;
 import pie.task.Deadline;
@@ -40,6 +41,7 @@ public class Parser {
     private static final String EVENT_REGEX = "^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$";
     private static final String ON_REGEX = "^on\\s+(\\d{4}-\\d{2}-\\d{2})$";
     private static final String FIND_REGEX = "^find\\s+(.*)$";
+    private static final String SORT_REGEX = "^sort\\s+by\\s+(description|deadline|status)\\s+(asc|desc)$";
 
     /**
      * Parses the user input and returns the corresponding Command.
@@ -67,6 +69,10 @@ public class Parser {
         case "event" -> new AddEventCommand(parseEvent(input));
         case "on" -> new OnCommand(parseOnCommand(input));
         case "find" -> new FindCommand(parseFind(input));
+        case "sort" -> {
+            String[] sortArgs = parseSort(input);
+            yield new SortCommand(sortArgs[0], sortArgs[1]);
+        }
         default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
     }
@@ -209,5 +215,28 @@ public class Parser {
             throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get()
                     + "Use: find <keyword>\n");
         }
+    }
+
+    /**
+     * Parses the sort command and extracts sorting type and order.
+     *
+     * @param input User input.
+     * @return Sort parameters as a String array: [type, order].
+     * @throws ParseException If the sort format is invalid.
+     */
+    public static String[] parseSort(String input) throws ParseException {
+        Matcher m = Pattern.compile(SORT_REGEX).matcher(input.trim());
+
+        if (!m.matches()) {
+            throw new ParseException(BotMessage.ERROR_INVALID_FORMAT.get() + """
+                    Use: sort by <field> <order>
+                    Fields: deadline, description, status
+                    Order: asc, desc""");
+        }
+
+        String field = m.group(1);
+        String order = m.group(2);
+
+        return new String[]{field, order};
     }
 }

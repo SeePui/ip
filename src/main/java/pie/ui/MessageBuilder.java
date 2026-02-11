@@ -130,4 +130,15 @@ public class MessageBuilder {
         }
         return sb.toString();
     }
+
+    /**
+     * Builds a message confirming the tasks have been sorted.
+     *
+     * @param field Field to sort by
+     * @param order Order of sorting ("asc" or "desc")
+     * @return Formatted task-sorted message.
+     */
+    public static String taskSorted(String field, String order) {
+        return String.format("Nice! I have sorted your tasks by %s in %s order.", field, order);
+    }
 }
