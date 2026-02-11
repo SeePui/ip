@@ -2,6 +2,7 @@ package pie.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -173,5 +174,59 @@ public class TaskList {
         return tasks.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(lowerCaseKeyword))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Sorts tasks by the given field and order.
+     *
+     * <p>
+     * Supports the following fields:
+     * <ul>
+     *     <li>"description" — sorts alphabetically by task description</li>
+     *     <li>"status" — sorts by completion status (false before true)</li>
+     *     <li>"deadline" — sorts Deadline tasks by their date/time; other tasks are placed last</li>
+     * </ul>
+     * The order can be "asc" (ascending) or "desc" (descending).
+     * </p>
+     *
+     * @param field The field to sort by ("description", "status", "deadline").
+     * @param order The sorting order ("asc" or "desc").
+     */
+    public void sortTasks(String field, String order) {
+        Comparator<Task> comparator = null;
+
+        switch (field) {
+        case "description":
+            comparator = Comparator.comparing(Task::getDescription);
+            if ("desc".equals(order)) {
+                comparator = comparator.reversed();
+            }
+            break;
+        case "status":
+            comparator = Comparator.comparing(Task::getIsDone);
+            if ("desc".equals(order)) {
+                comparator = comparator.reversed();
+            }
+            break;
+        case "deadline":
+            if ("asc".equals(order)) {
+                comparator = Comparator.comparing(
+                        t -> t instanceof Deadline ? ((Deadline) t).getBy() : null,
+                        Comparator.nullsLast(Comparator.naturalOrder())
+                );
+            } else {
+                comparator = Comparator.comparing(
+                        t -> t instanceof Deadline ? ((Deadline) t).getBy() : null,
+                        Comparator.nullsLast(Comparator.reverseOrder())
+                );
+            }
+            break;
+        default:
+            break;
+        }
+
+        if (comparator != null) {
+            tasks.sort(comparator);
+        }
     }
 }
