@@ -13,7 +13,7 @@ REM delete data from previous run
 if exist data\pie.txt del data\pie.txt
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\pie\pie.java
+javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\pie\Pie.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
