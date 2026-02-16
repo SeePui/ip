@@ -4,4 +4,3 @@ D | 1 | finish quiz 3 | 2026-01-30T16:00
 E | 0 | group presentation | 2026-02-09T16:00 | 2026-02-09T18:00
 T | 1 | problem set 2
 T | 1 | lecture training 4
-T | 0 | jij
