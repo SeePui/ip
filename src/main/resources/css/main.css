@@ -7,23 +7,37 @@
 
 .text-field {
     -fx-background-color: #f4efe9;
-    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: transparent;
+    -fx-padding: 8 14 8 14;
     -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0.2, 0, 2);
+}
+
+.text-field:focused {
+    -fx-border-color: #d99d87;
+    -fx-border-width: 1;
 }
 
 .button {
     -fx-background-color: #683321;
-    -fx-font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-background-radius: 20;
+    -fx-padding: 8 18 8 18;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.2, 0, 2);
 }
 
 .button:hover {
-    -fx-background-color: #d99d87;
+    -fx-background-color: #8a4a35;
 }
 
 .button:pressed {
     -fx-background-color: #f28705;
+    -fx-translate-y: 1;
 }
 
 .scroll-pane,
