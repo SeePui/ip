@@ -5,8 +5,14 @@
     -fx-font-size: 13px;
 }
 
-.text-field {
+.inputBox {
     -fx-background-color: #f4efe9;
+    -fx-border-color: transparent;
+    -fx-padding: 8 12 8 12;
+}
+
+.text-field {
+    -fx-background-color: white;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-border-color: transparent;
@@ -22,11 +28,7 @@
 
 .button {
     -fx-background-color: #683321;
-    -fx-background-radius: 20;
-    -fx-padding: 8 18 8 18;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-background-radius: 50%;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.2, 0, 2);
 }

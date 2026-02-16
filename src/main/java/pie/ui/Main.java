@@ -25,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("Pie Chatbot");
             stage.setMinHeight(250);
-            stage.setMinWidth(420);
+            stage.setMinWidth(400);
             fxmlLoader.<MainWindow>getController().setPie(pie); // inject the Pie instance
             stage.show();
         } catch (IOException e) {
