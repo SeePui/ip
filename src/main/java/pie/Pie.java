@@ -59,12 +59,14 @@ public class Pie {
         try {
             Command command = Parser.parseCommand(input);
             command.execute(taskList, ui, storage);
-
+            ui.setErrorMessage(false);
         } catch (ParseException | NumberFormatException
                  | StorageException | IndexOutOfBoundsException e) {
             ui.setMessage(e.getMessage());
+            ui.setErrorMessage(true);
         } catch (Exception e) {
             ui.setMessage(BotMessage.ERROR_UNKNOWN.get());
+            ui.setErrorMessage(true);
         }
     }
 
