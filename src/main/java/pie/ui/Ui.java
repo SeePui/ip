@@ -6,6 +6,7 @@ package pie.ui;
  */
 public class Ui {
     private String message;
+    private boolean isErrorMessage;
 
     /**
      * Returns the latest message stored in the UI.
@@ -29,5 +30,13 @@ public class Ui {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isErrorMessage() {
+        return this.isErrorMessage;
+    }
+
+    public void setErrorMessage(boolean error) {
+        this.isErrorMessage = error;
     }
 }

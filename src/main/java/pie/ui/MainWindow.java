@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getPieDialog("""
                 Hello! I’m Pie
                 Ready to help you stay on top of your tasks.
-                Type a command and let’s begin!""", pieImage));
+                Type a command and let’s begin!""", pieImage, false));
     }
 
     /**
@@ -60,9 +60,11 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         pie.run(input);
         String response = pie.getUi().getMessage();
+        boolean isErrorMessage = pie.getUi().isErrorMessage();
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPieDialog(response, pieImage)
+                DialogBox.getPieDialog(response, pieImage, isErrorMessage)
         );
         userInput.clear();
     }

@@ -70,9 +70,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getPieDialog(String text, Image img) {
+    public static DialogBox getPieDialog(String text, Image img, boolean isErrorMessage) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (isErrorMessage) {
+            db.dialog.getStyleClass().add("error-label");
+        }
         return db;
     }
 }

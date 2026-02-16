@@ -55,6 +55,7 @@ public class Storage {
                     Ui ui;
                     ui = new Ui();
                     ui.setMessage(se.getMessage());
+                    ui.setErrorMessage(true);
                 }
             }
             return tasks;
