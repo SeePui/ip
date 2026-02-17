@@ -28,6 +28,14 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public LocalDateTime getTo() {
+        return to;
+    }
+
+    public LocalDateTime getFrom() {
+        return from;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter outputFormat =
