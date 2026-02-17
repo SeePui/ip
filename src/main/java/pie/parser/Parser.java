@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,8 +60,14 @@ public class Parser {
         String commandType = parts[0].toLowerCase();
 
         return switch (commandType) {
-        case "bye" -> new ExitCommand();
-        case "list" -> new ListCommand();
+        case "bye" -> {
+            parseSingleCommand(input, "bye");
+            yield new ExitCommand();
+        }
+        case "list" -> {
+            parseSingleCommand(input, "list");
+            yield new ListCommand();
+        }
         case "mark" -> new MarkCommand(parseIndex(input));
         case "unmark" -> new UnmarkCommand(parseIndex(input));
         case "delete" -> new DeleteCommand(parseIndex(input));
@@ -75,6 +82,21 @@ public class Parser {
         }
         default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
+    }
+
+    /**
+     * Parses commands that requires no additional argument.
+     *
+     * @param input       The full user input.
+     * @param commandName The expected command keyword.
+     * @throws ParseException If extra arguments are detected.
+     */
+    private static void parseSingleCommand(String input, String commandName)
+            throws ParseException {
+
+        if (!input.trim().equals(commandName)) {
+            throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
+        }
     }
 
     /**
@@ -140,7 +162,9 @@ public class Parser {
             String description = m.group(1);
             String byStr = m.group(2);
 
-            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter customFormat = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDateTime by = LocalDateTime.parse(byStr, customFormat);
             return new Deadline(description, by);
         } catch (DateTimeParseException e) {
@@ -168,9 +192,17 @@ public class Parser {
             String fromStr = m.group(2);
             String toStr = m.group(3);
 
-            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+            DateTimeFormatter customFormat = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDateTime from = LocalDateTime.parse(fromStr, customFormat);
             LocalDateTime to = LocalDateTime.parse(toStr, customFormat);
+
+            if (!from.isBefore(to)) {
+                throw new ParseException(BotMessage.ERROR_INVALID_DATE_RANGE.get());
+            }
+
             return new Event(description, from, to);
         } catch (DateTimeParseException e) {
             throw new ParseException(BotMessage.ERROR_INVALID_DATE_FORMAT.get());
