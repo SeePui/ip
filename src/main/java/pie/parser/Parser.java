@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -140,7 +141,9 @@ public class Parser {
             String description = m.group(1);
             String byStr = m.group(2);
 
-            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter customFormat = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDateTime by = LocalDateTime.parse(byStr, customFormat);
             return new Deadline(description, by);
         } catch (DateTimeParseException e) {
@@ -168,7 +171,10 @@ public class Parser {
             String fromStr = m.group(2);
             String toStr = m.group(3);
 
-            DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+            DateTimeFormatter customFormat = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDateTime from = LocalDateTime.parse(fromStr, customFormat);
             LocalDateTime to = LocalDateTime.parse(toStr, customFormat);
 
