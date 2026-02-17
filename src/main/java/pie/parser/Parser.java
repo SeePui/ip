@@ -60,8 +60,14 @@ public class Parser {
         String commandType = parts[0].toLowerCase();
 
         return switch (commandType) {
-        case "bye" -> new ExitCommand();
-        case "list" -> new ListCommand();
+        case "bye" -> {
+            parseSingleCommand(input, "bye");
+            yield new ExitCommand();
+        }
+        case "list" -> {
+            parseSingleCommand(input, "list");
+            yield new ListCommand();
+        }
         case "mark" -> new MarkCommand(parseIndex(input));
         case "unmark" -> new UnmarkCommand(parseIndex(input));
         case "delete" -> new DeleteCommand(parseIndex(input));
@@ -76,6 +82,21 @@ public class Parser {
         }
         default -> throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
         };
+    }
+
+    /**
+     * Parses commands that requires no additional argument.
+     *
+     * @param input       The full user input.
+     * @param commandName The expected command keyword.
+     * @throws ParseException If extra arguments are detected.
+     */
+    private static void parseSingleCommand(String input, String commandName)
+            throws ParseException {
+
+        if (!input.trim().equals(commandName)) {
+            throw new ParseException(BotMessage.ERROR_INVALID_COMMAND.get());
+        }
     }
 
     /**
