@@ -20,6 +20,8 @@ public enum BotMessage {
 
     ERROR_INVALID_DATE_FORMAT("Invalid date format. Use yyyy-MM-dd HHmm.\n"),
 
+    ERROR_INVALID_DATE_RANGE("Invalid date format.\n Start date/time must be before end date/time.\n"),
+
     ERROR_INVALID_ON_DATE_FORMAT("Invalid date format. Use yyyy-MM-dd.\n"),
 
     ERROR_INVALID_INDEX("""

@@ -171,6 +171,11 @@ public class Parser {
             DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime from = LocalDateTime.parse(fromStr, customFormat);
             LocalDateTime to = LocalDateTime.parse(toStr, customFormat);
+
+            if (!from.isBefore(to)) {
+                throw new ParseException(BotMessage.ERROR_INVALID_DATE_RANGE.get());
+            }
+
             return new Event(description, from, to);
         } catch (DateTimeParseException e) {
             throw new ParseException(BotMessage.ERROR_INVALID_DATE_FORMAT.get());
