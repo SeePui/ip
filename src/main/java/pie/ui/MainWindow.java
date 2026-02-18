@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import pie.BotMessage;
 import pie.Pie;
 
 /**
@@ -37,10 +38,8 @@ public class MainWindow extends AnchorPane {
      * Displays a welcome message for the user.
      */
     public void displayWelcomeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getPieDialog("""
-                Hello! I’m Pie
-                Ready to help you stay on top of your tasks.
-                Type a command and let’s begin!""", pieImage, false));
+        dialogContainer.getChildren().add(DialogBox.getPieDialog(BotMessage.START.get(),
+                pieImage, false));
     }
 
     /**
