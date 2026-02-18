@@ -9,7 +9,7 @@ package pie;
  */
 public enum BotMessage {
     START("""
-            Hello! I\'m Pie
+            Hello! I\'m Pie!
             Ready to help you stay on top of your tasks.
             Type a command and let\'s begin!"""),
 
