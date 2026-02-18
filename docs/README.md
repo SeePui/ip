@@ -8,7 +8,7 @@ while still offering the visual advantages of a **Graphical User Interface** (GU
 
 ![Screenshot of the Pie Chatbot](./Ui.png)
 
-### Quick Start
+## Quick Start
 
 1. Ensure you have Java ```17``` or above installed on your computer.
 
@@ -20,19 +20,20 @@ while still offering the visual advantages of a **Graphical User Interface** (GU
    ```java -jar pie.jar``` command to run the application.
    A GUI similar to the one below should appear in a few seconds. **Please note that your version will be a fresh copy
    and only the welcome message will be displayed.**
+
    ![Screenshot of the Pie Chatbot](./Ui.png)
 
 5. Refer to the Features below for details of each command.
 
-### Features
+## Features
 
-#### Listing all the tasks: ```list```
+### Listing all the tasks: ```list```
 
 Shows a list of all tasks in the list.
 
 Format: ```list```
 
-#### Adding Todos: ```todo```
+### Adding Todos: ```todo```
 
 Create a 'todo' task with the description given.
 
@@ -42,7 +43,7 @@ Examples:
 
 - ```todo buy book``` will create a todo task with the description of ```buy book```
 
-#### Adding Deadlines: ```deadline```
+### Adding Deadlines: ```deadline```
 
 Create a 'deadline' task with the description and date given.
 
@@ -53,7 +54,7 @@ Examples:
 - ```deadline finish quiz /by 2026-02-09 1600``` will create a deadline task with the description of ```finish quiz```
   with the date by ```2026-02-09 1600```
 
-#### Adding Events: ```event```
+### Adding Events: ```event```
 
 Create an 'event' task with the description and date given.
 
@@ -64,7 +65,7 @@ Examples:
 - ```event project meeting /from 2026-02-04 2000 /to 2026-02-04 2100``` will create an event task with the description
   of ```project meeting``` with the date from ```2026-02-04 2000``` to ```2026-02-04 2100```
 
-#### Marking a task: ```mark```
+### Marking a task: ```mark```
 
 Marks a specific task from the list as done.
 
@@ -78,7 +79,7 @@ Examples:
 
 - ```list``` followed by ```mark 2``` marks the 2nd task in the list as done.
 
-#### Unmarking a task: ```unmark```
+### Unmarking a task: ```unmark```
 
 Unmarks a specific task from the list as done.
 
@@ -92,7 +93,7 @@ Examples:
 
 - ```list``` followed by ```ummark 2``` unmarks the 2nd task in the list as done.
 
-#### Deleting a task: ```delete```
+### Deleting a task: ```delete```
 
 Deletes a specific task from the list.
 
@@ -106,7 +107,7 @@ Examples:
 
 - ```list``` followed by ```delete 2``` deletes the 2nd task in the list.
 
-#### Finding some tasks: ```find```
+### Finding some tasks: ```find```
 
 Finds all tasks in the list containing the given keywords.
 
@@ -120,7 +121,7 @@ Examples:
 
 - ```find quiz``` will return tasks containing the ```quiz``` keyword.
 
-#### Finding some tasks occurring on a specified date: ```on```
+### Finding some tasks occurring on a specified date: ```on```
 
 Finds all tasks in the list occurring on a specified date.
 
@@ -132,7 +133,7 @@ Examples:
 
 - ```on 2026-02-09``` will return all the tasks occurring on ```2026-02-09```,
 
-#### Sorting tasks: ```sort```
+### Sorting tasks: ```sort```
 
 Sorts all the tasks in the list by a specified field and order.
 
@@ -147,13 +148,13 @@ Examples:
 - ```sort deadline desc``` will sort all tasks by deadline in descending order (latest first).
 - ```sort status asc``` will sort tasks by completion status (incomplete tasks first).
 
-#### Exiting the program: ```bye```
+### Exiting the program: ```bye```
 
 Exits the program.
 
 Format: ```bye```
 
-#### Take note
+### Take note
 
 Pie Chatbot data are saved in the hard disk automatically after any command that changes the data. That local file will
 be located in data/pie.txt. There is no need to save manually.
